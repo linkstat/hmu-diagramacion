@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- Banco de horas del agente: créditos de horas extras con vencimiento, débitos FIFO y vencimientos. -->
+<BorderPane prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ar.com.hmu.controller.BancoHorasController"
+            stylesheets="@../css/novedades.css">
+    <top>
+        <VBox spacing="6">
+            <padding>
+                <Insets bottom="6" left="10" right="10" top="10"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <Label text="Banco de horas" styleClass="titulo-pantalla"/>
+                <Label fx:id="agenteLabel" styleClass="subtitulo-perfil"/>
+                <HBox HBox.hgrow="ALWAYS"/>
+                <Label fx:id="agenteComboLabel" text="Agente:"/>
+                <ComboBox fx:id="agenteCombo" prefWidth="240"/>
+                <Button text="Cerrar" onAction="#onCerrar" cancelButton="true"/>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="24">
+                <Label fx:id="saldoLabel" styleClass="detalle-titulo"/>
+                <Label fx:id="proximoVencimientoLabel" styleClass="subtitulo-perfil"/>
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <TableView fx:id="movimientosTable">
+            <BorderPane.margin>
+                <Insets left="10" right="10"/>
+            </BorderPane.margin>
+        </TableView>
+    </center>
+    <bottom>
+        <Label fx:id="ayudaLabel" wrapText="true" styleClass="ayuda">
+            <padding>
+                <Insets bottom="8" left="10" right="10" top="6"/>
+            </padding>
+        </Label>
+    </bottom>
+</BorderPane>

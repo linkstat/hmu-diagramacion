@@ -1,0 +1,11 @@
+/* Estilos de la pantalla de bandeja de memorándums.
+   La pseudo-class `borrador` se activa desde BandejaMemorandumsController
+   cuando una fila representa un memo en estado BORRADOR (en la pestaña
+   "Enviados y borradores"). Color marrón institucional, distinto de los
+   colores semaforizados (verde=AUTORIZADO, rojo=RECHAZADO).
+*/
+.table-row-cell:borrador,
+.table-row-cell:borrador .table-cell {
+    -fx-text-fill: #8B4513;
+    -fx-font-style: italic;
+}

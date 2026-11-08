@@ -1,0 +1,27 @@
+# Plantilla de configuración. Copiar a config.yaml (en esta misma carpeta)
+# y completar los valores (config.yaml es el único archivo que lee la aplicación).
+#
+#   cp src/main/resources/config/config.example.yaml src/main/resources/config/config.yaml
+#
+db:
+  dbType: postgresql
+  dbHost: localhost
+  dbPort: 5432
+  dbName: aromito
+  dbUser: aromito
+  dbPass: ""
+
+# Configuración SMTP para notificaciones por email (memorándums, diagramas).
+# Si "host" queda en blanco, el EmailNotificationService es no-op silencioso
+# (útil en desarrollo o en tests sin acceso al relay).
+# Ejemplo para el relay de Brevo (puerto 587 con STARTTLS):
+#   host: "smtp-relay.brevo.com", port: 587, auth: true, tls: true
+# El remitente debe pertenecer a un dominio autenticado en el relay.
+smtp:
+  host: ""
+  port: 587
+  from: "Aromito <noreply@hmu.com.ar>"
+  auth: true
+  tls: true
+  username: ""
+  password: ""

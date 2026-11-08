@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ar.com.hmu.controller.ImportarPadronController"
+            stylesheets="@../css/novedades.css">
+    <top>
+        <VBox spacing="6">
+            <padding>
+                <Insets bottom="8" left="10" right="10" top="10"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <Label text="Importar listado de agentes" styleClass="titulo-pantalla"/>
+                <Label text="Carga inicial del padrón desde una planilla (CSV)" styleClass="subtitulo-perfil"/>
+                <HBox HBox.hgrow="ALWAYS"/>
+                <Button text="Seleccionar archivo…" onAction="#onSeleccionar"/>
+                <Button text="Cerrar" onAction="#onCerrar" cancelButton="true"/>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="14"
+                  style="-fx-background-color: #f4f6f7; -fx-border-color: #d5d8dc; -fx-padding: 5 8 5 8;">
+                <Label text="Archivo:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="archivoLabel" text="(ninguno)"/>
+                <Label fx:id="resumenLabel"/>
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <TableView fx:id="filasTable">
+            <BorderPane.margin>
+                <Insets left="10" right="10"/>
+            </BorderPane.margin>
+        </TableView>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="8">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="8"/>
+            </padding>
+            <Label styleClass="ayuda" wrapText="true"
+                   text="Columnas: cuil;apellidos;nombres;sexo;mail;servicio;modalidad;vinculacion. Las cuentas nuevas tienen rol de agente y deben cambiar la contraseña inicial en el primer ingreso."/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button fx:id="confirmarButton" text="Confirmar importación" onAction="#onConfirmar" defaultButton="true" disable="true"/>
+        </HBox>
+    </bottom>
+</BorderPane>

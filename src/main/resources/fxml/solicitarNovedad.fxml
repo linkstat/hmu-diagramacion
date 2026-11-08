@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="600.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/23"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ar.com.hmu.controller.SolicitarNovedadController"
+            stylesheets="@../css/novedades.css">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <padding>
+                <Insets bottom="8" left="14" right="14" top="12"/>
+            </padding>
+            <Label fx:id="tituloLabel" text="Solicitar novedad" styleClass="titulo-pantalla"/>
+            <Label fx:id="estadoChip" styleClass="estado-chip" visible="false"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets left="14" right="14"/>
+            </padding>
+            <Label fx:id="observacionLabel" wrapText="true" visible="false" managed="false"
+                   style="-fx-background-color: #ebdef0; -fx-text-fill: #7d3c98; -fx-padding: 6 8 6 8; -fx-background-radius: 4;"/>
+            <GridPane fx:id="formGrid" hgap="10" vgap="8">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="150" prefWidth="150"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+                <Label text="Tipo de novedad:" GridPane.rowIndex="0"/>
+                <ComboBox fx:id="tipoCombo" prefWidth="260" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Agente:" GridPane.rowIndex="1"/>
+                <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <ComboBox fx:id="agenteCombo" prefWidth="260"/>
+                    <Label fx:id="saldoLabel" styleClass="ayuda"/>
+                </HBox>
+
+                <Label fx:id="desdeLabel" text="Desde:" GridPane.rowIndex="2"/>
+                <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <DatePicker fx:id="desdePicker" prefWidth="140"/>
+                    <Label fx:id="jornadaDesdeLabel" styleClass="jornada-info"/>
+                </HBox>
+
+                <Label fx:id="contraparteLabel" text="Intercambia con:" GridPane.rowIndex="3"/>
+                <ComboBox fx:id="contraparteCombo" prefWidth="260" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <ComboBox fx:id="paseOrigenCombo" prefWidth="360" visible="false" managed="false"
+                          GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                <Label fx:id="hastaLabel" text="Hasta:" GridPane.rowIndex="4"/>
+                <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <DatePicker fx:id="hastaPicker" prefWidth="140"/>
+                    <Label fx:id="jornadaHastaLabel" styleClass="jornada-info"/>
+                </HBox>
+
+                <Label fx:id="horasLabel" text="Horario:" GridPane.rowIndex="5"/>
+                <HBox fx:id="horasBox" spacing="6" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <TextField fx:id="horaDesdeField" promptText="hh:mm" prefWidth="70"/>
+                    <Label fx:id="horaALabel" text="a"/>
+                    <TextField fx:id="horaHastaField" promptText="hh:mm" prefWidth="70"/>
+                    <Label fx:id="cantHorasLabel" styleClass="ayuda"/>
+                </HBox>
+
+                <Label text="Motivo:" GridPane.rowIndex="6"/>
+                <TextArea fx:id="motivoArea" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+                <Label fx:id="justificacionLabel" text="Justificación:" visible="false" managed="false"
+                       GridPane.rowIndex="7"/>
+                <TextField fx:id="justificacionField" visible="false" managed="false"
+                           GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+
+                <Label fx:id="respaldoLabel" text="Respaldo:" GridPane.rowIndex="8"/>
+                <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                    <Button text="Adjuntar…" onAction="#onAdjuntar"/>
+                    <FlowPane fx:id="adjuntosPane" hgap="8" vgap="2"/>
+                </HBox>
+            </GridPane>
+            <Label text="Validación" styleClass="seccion-titulo"/>
+            <ListView fx:id="validacionList" prefHeight="110" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="8">
+            <padding>
+                <Insets bottom="12" left="14" right="14" top="8"/>
+            </padding>
+            <Label fx:id="ayudaLabel" styleClass="ayuda"
+                   text="La solicitud se valida contra el diagrama vigente mientras la completa."/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button text="Cancelar" onAction="#onCancelar" cancelButton="true"/>
+            <Button fx:id="guardarButton" text="Guardar borrador" onAction="#onGuardar"/>
+            <Button fx:id="enviarButton" text="Enviar solicitud" onAction="#onEnviar" defaultButton="true"/>
+        </HBox>
+    </bottom>
+</BorderPane>

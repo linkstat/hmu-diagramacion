@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/23"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ar.com.hmu.controller.IndicadoresController"
+            stylesheets="@../css/novedades.css">
+    <top>
+        <VBox spacing="6">
+            <padding>
+                <Insets bottom="6" left="10" right="10" top="10"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <Label text="Indicadores de ausentismo y cobertura" styleClass="titulo-pantalla"/>
+                <HBox HBox.hgrow="ALWAYS"/>
+                <Label text="Desde:"/>
+                <DatePicker fx:id="desdePicker" prefWidth="130"/>
+                <Label text="Hasta:"/>
+                <DatePicker fx:id="hastaPicker" prefWidth="130"/>
+                <Label text="Servicio:"/>
+                <ComboBox fx:id="servicioCombo" prefWidth="210"/>
+                <Button text="Calcular" onAction="#onCalcular" defaultButton="true"/>
+                <Button text="Cerrar" onAction="#onCerrar" cancelButton="true"/>
+            </HBox>
+            <Label fx:id="periodoLabel" wrapText="true" styleClass="subtitulo-perfil"/>
+        </VBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+            <BorderPane.margin>
+                <Insets left="10" right="10"/>
+            </BorderPane.margin>
+            <SplitPane dividerPositions="0.68">
+                <VBox spacing="4">
+                    <Label text="Ausentismo por servicio y tipo de novedad (horas)" styleClass="seccion-titulo"/>
+                    <TableView fx:id="ausentismoTable" VBox.vgrow="ALWAYS"/>
+                    <Label styleClass="ayuda" wrapText="true" maxWidth="Infinity" minHeight="-Infinity"
+                           text="Siglas internas del HMU (en el parte diario, junto al código de Capital Humano): PROGR. horas programadas · LIC licencias · FJ faltas justificadas · FI faltas injustificadas · FC francos compensatorios · PS pases de salida sin retorno · T llegadas tarde · AUS ausencia total · % de AUS sobre PROGR."/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="Porcentaje de ausentismo por servicio" styleClass="seccion-titulo">
+                        <padding><Insets left="6"/></padding>
+                    </Label>
+                    <BarChart fx:id="ausentismoChart" legendVisible="false" animated="false" VBox.vgrow="ALWAYS"
+                              horizontalGridLinesVisible="false" verticalGridLinesVisible="true"
+                              barGap="2" categoryGap="34">
+                        <xAxis><NumberAxis fx:id="porcentajeAxis" label="Porcentaje del tiempo programado" side="BOTTOM"/></xAxis>
+                        <yAxis><CategoryAxis side="LEFT"/></yAxis>
+                    </BarChart>
+                </VBox>
+            </SplitPane>
+            <VBox spacing="4">
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <padding><Insets top="4"/></padding>
+                    <Label text="Cobertura por día y franja horaria" styleClass="seccion-titulo"/>
+                    <HBox HBox.hgrow="ALWAYS"/>
+                    <CheckBox fx:id="soloBajoMinimoCheck" text="Sólo franjas bajo la dotación mínima" selected="true"/>
+                </HBox>
+                <TableView fx:id="coberturaTable" VBox.vgrow="ALWAYS"/>
+            </VBox>
+        </SplitPane>
+    </center>
+    <bottom>
+        <HBox>
+            <padding><Insets bottom="10" left="10" right="10" top="6"/></padding>
+            <Label styleClass="ayuda" text="Calculado sobre los partes diarios cerrados y los diagramas aprobados (vistas v_indicador_ausentismo y v_indicador_cobertura). No identifica agentes."/>
+        </HBox>
+    </bottom>
+</BorderPane>

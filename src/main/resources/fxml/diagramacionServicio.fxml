@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/23"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ar.com.hmu.controller.DiagramacionServicioController"
+            stylesheets="@../css/diagramacionServicio.css">
+    <top>
+        <VBox spacing="6">
+            <padding>
+                <Insets bottom="6" left="10" right="10" top="10"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Diagramación de servicio" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+                <Label text="Servicio:"/>
+                <ComboBox fx:id="servicioCombo" prefWidth="220"/>
+                <Label text="Diagrama:"/>
+                <ComboBox fx:id="diagramaCombo" prefWidth="280"/>
+                <Button fx:id="nuevoDiagramaButton" text="Nuevo diagrama…" onAction="#onNuevoDiagrama"/>
+                <HBox HBox.hgrow="ALWAYS"/>
+                <Label fx:id="estadoChip" text="" styleClass="estado-chip"/>
+                <Button text="Cerrar" onAction="#onCerrar" cancelButton="true"/>
+            </HBox>
+            <HBox fx:id="observacionBanner" styleClass="observacion-banner" visible="false"
+                  managed="false" spacing="8" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets bottom="6" left="10" right="10" top="6"/>
+                </padding>
+                <Label text="Observado por la Oficina de Personal:" styleClass="observacion-titulo"/>
+                <Label fx:id="observacionLabel" wrapText="true" HBox.hgrow="ALWAYS"/>
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <SplitPane fx:id="splitPane" dividerPositions="0.78">
+            <StackPane>
+                <TableView fx:id="grillaTable"/>
+                <ScrollPane fx:id="calendarioScroll" fitToWidth="true" visible="false"
+                            styleClass="calendario-scroll">
+                    <GridPane fx:id="calendarioGrid" hgap="4" vgap="4">
+                        <padding>
+                            <Insets bottom="8" left="8" right="8" top="8"/>
+                        </padding>
+                    </GridPane>
+                </ScrollPane>
+            </StackPane>
+            <VBox fx:id="validacionPanel" spacing="6" minWidth="220">
+                <padding>
+                    <Insets bottom="10" left="10" right="10" top="10"/>
+                </padding>
+                <Label text="Validación" style="-fx-font-weight: bold;"/>
+                <ListView fx:id="validacionList" VBox.vgrow="ALWAYS"/>
+                <Label fx:id="validacionResumenLabel" wrapText="true" styleClass="ayuda"/>
+            </VBox>
+        </SplitPane>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="6"/>
+            </padding>
+            <Label text="Vista:" styleClass="ayuda"/>
+            <ToggleButton fx:id="vistaTablaToggle" text="Tabla" selected="true"/>
+            <ToggleButton fx:id="vistaCalendarioToggle" text="Calendario"/>
+            <Button fx:id="aplicarPlantillaButton" text="Aplicar plantilla…" onAction="#onAplicarPlantilla"
+                    visible="false" managed="false"/>
+            <Button fx:id="vistaEmpleadosButton" text="Vista de agentes…" onAction="#onVistaEmpleados"
+                    visible="false" managed="false"/>
+            <Label fx:id="ayudaLabel" text="Doble clic en una celda para editar la jornada."
+                   styleClass="ayuda"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button fx:id="eliminarButton" text="Eliminar borrador" onAction="#onEliminar"/>
+            <Button fx:id="validarButton" text="Validar" onAction="#onValidar"/>
+            <Button fx:id="guardarButton" text="Guardar" onAction="#onGuardar"/>
+            <Button fx:id="enviarButton" text="Enviar a aprobación" onAction="#onEnviar"/>
+            <Button fx:id="observarButton" text="Observar…" onAction="#onObservar"
+                    visible="false" managed="false"/>
+            <Button fx:id="aprobarButton" text="Aprobar" onAction="#onAprobar"
+                    visible="false" managed="false"/>
+        </HBox>
+    </bottom>
+</BorderPane>

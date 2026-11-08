@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ar.com.hmu.controller.RolesVigenciaController"
+            stylesheets="@../css/novedades.css">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="8">
+            <padding>
+                <Insets bottom="8" left="10" right="10" top="10"/>
+            </padding>
+            <Label text="Roles con vigencia" styleClass="titulo-pantalla"/>
+            <Label text="Designaciones de agente, jefatura, Oficina de Personal y Dirección" styleClass="subtitulo-perfil"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button text="Cerrar" onAction="#onCerrar" cancelButton="true"/>
+        </HBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.3">
+            <BorderPane.margin>
+                <Insets left="10" right="10"/>
+            </BorderPane.margin>
+            <VBox spacing="6">
+                <padding><Insets right="6"/></padding>
+                <TextField fx:id="buscarField" promptText="Buscar por apellido o CUIL…"/>
+                <ListView fx:id="usuariosList" VBox.vgrow="ALWAYS"/>
+            </VBox>
+            <VBox spacing="10">
+                <padding><Insets left="10" right="6" top="2"/></padding>
+                <Label fx:id="usuarioLabel" styleClass="detalle-titulo" text="Seleccione un usuario"/>
+                <Label text="Asignaciones" styleClass="seccion-titulo"/>
+                <TableView fx:id="asignacionesTable" prefHeight="220" VBox.vgrow="ALWAYS"/>
+                <HBox alignment="CENTER_RIGHT" spacing="8">
+                    <Label text="Fin:"/>
+                    <DatePicker fx:id="revocarPicker" prefWidth="140"/>
+                    <Button fx:id="revocarButton" text="Revocar asignación" onAction="#onRevocar"/>
+                </HBox>
+                <Label text="Nueva asignación" styleClass="seccion-titulo"/>
+                <GridPane hgap="10" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150" prefWidth="150"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+                    <Label text="Rol:" GridPane.rowIndex="0"/>
+                    <ComboBox fx:id="rolCombo" prefWidth="260" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <Label text="Servicio (jefatura):" GridPane.rowIndex="1"/>
+                    <ComboBox fx:id="servicioCombo" prefWidth="260" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <Label text="Vigencia:" GridPane.rowIndex="2"/>
+                    <HBox spacing="8" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label text="desde"/>
+                        <DatePicker fx:id="desdePicker" prefWidth="140"/>
+                        <Label text="hasta"/>
+                        <DatePicker fx:id="hastaPicker" prefWidth="140" promptText="(sin fin)"/>
+                    </HBox>
+                    <Label text="Memorando:" GridPane.rowIndex="3"/>
+                    <TextField fx:id="memorandoField" promptText="Memorándum DH N.º …" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                </GridPane>
+                <HBox alignment="CENTER_RIGHT">
+                    <Button fx:id="asignarButton" text="Asignar rol" onAction="#onAsignar" defaultButton="true"/>
+                </HBox>
+            </VBox>
+        </SplitPane>
+    </center>
+    <bottom>
+        <HBox>
+            <padding><Insets bottom="10" left="10" right="10" top="6"/></padding>
+            <Label styleClass="ayuda"
+                   text="El control de acceso aplica cada rol desde su fecha de inicio. Al designar una jefatura se cierra la del titular anterior el día previo y la nueva pasa a ser la encargada del servicio."/>
+        </HBox>
+    </bottom>
+</BorderPane>

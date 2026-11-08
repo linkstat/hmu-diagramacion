@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ar.com.hmu.controller.BandejaMemorandumsController"
+            stylesheets="@../css/bandejaMemorandums.css">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10"/>
+            </padding>
+            <Label text="Memorándums" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+            <Label fx:id="resumenLabel" text=""/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button fx:id="nuevoMemoButton" text="Nuevo memorándum" onAction="#onNuevoMemo"/>
+            <Button text="Refrescar" onAction="#onRefrescar"/>
+            <Button text="Cerrar" onAction="#onCerrar"/>
+        </HBox>
+    </top>
+    <center>
+        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+            <Tab fx:id="tabRecibidos" text="Recibidos">
+                <VBox spacing="6">
+                    <padding>
+                        <Insets bottom="10" left="10" right="10" top="10"/>
+                    </padding>
+                    <TableView fx:id="recibidosTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="recibidosFechaCol" prefWidth="140" text="FECHA"/>
+                            <TableColumn fx:id="recibidosAsuntoCol" prefWidth="320" text="ASUNTO"/>
+                            <TableColumn fx:id="recibidosRemitenteCol" prefWidth="200" text="DE"/>
+                            <TableColumn fx:id="recibidosEstadoCol" prefWidth="120" text="ESTADO"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+            <Tab fx:id="tabEnviados" text="Enviados y borradores">
+                <VBox spacing="6">
+                    <padding>
+                        <Insets bottom="10" left="10" right="10" top="10"/>
+                    </padding>
+                    <TableView fx:id="enviadosTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="enviadosFechaCol" prefWidth="130" text="FECHA"/>
+                            <TableColumn fx:id="enviadosAsuntoCol" prefWidth="280" text="ASUNTO"/>
+                            <TableColumn fx:id="enviadosDestinatariosCol" prefWidth="240" text="DESTINATARIO/S"/>
+                            <TableColumn fx:id="enviadosEstadoCol" prefWidth="140" text="ESTADO"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+            <Tab fx:id="tabPendientes" text="Pendientes de autorizar">
+                <VBox spacing="6">
+                    <padding>
+                        <Insets bottom="10" left="10" right="10" top="10"/>
+                    </padding>
+                    <TableView fx:id="pendientesTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="pendientesFechaCol" prefWidth="140" text="FECHA"/>
+                            <TableColumn fx:id="pendientesAsuntoCol" prefWidth="320" text="ASUNTO"/>
+                            <TableColumn fx:id="pendientesRemitenteCol" prefWidth="240" text="DE"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>

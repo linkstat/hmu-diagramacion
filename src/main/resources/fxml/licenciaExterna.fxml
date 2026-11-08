@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="560.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/23"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ar.com.hmu.controller.LicenciaExternaController"
+            stylesheets="@../css/novedades.css">
+    <top>
+        <VBox spacing="2">
+            <padding>
+                <Insets bottom="8" left="14" right="14" top="12"/>
+            </padding>
+            <Label text="Registrar licencia de origen externo" styleClass="titulo-pantalla"/>
+            <Label text="Licencia tramitada en los sistemas municipales (VeDi o MiDocta): se asienta sin circuito de autorización."
+                   styleClass="subtitulo-perfil" wrapText="true"/>
+        </VBox>
+    </top>
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets left="14" right="14"/>
+            </padding>
+            <GridPane hgap="10" vgap="8">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="170" prefWidth="170"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+                <Label text="Agente:" GridPane.rowIndex="0"/>
+                <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <ComboBox fx:id="agenteCombo" prefWidth="300"/>
+                </HBox>
+                <Label text="Tipo de licencia:" GridPane.rowIndex="1"/>
+                <ComboBox fx:id="tipoCombo" prefWidth="360" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label text="Desde:" GridPane.rowIndex="2"/>
+                <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <DatePicker fx:id="desdePicker" prefWidth="140"/>
+                    <Label text="Hasta:"/>
+                    <DatePicker fx:id="hastaPicker" prefWidth="140"/>
+                    <Label fx:id="diasLabel" styleClass="ayuda"/>
+                </HBox>
+                <Label text="Referencia del trámite:" GridPane.rowIndex="3"/>
+                <TextField fx:id="referenciaField" promptText="VeDi 2026-000000 / MiDocta 000000" prefWidth="300"
+                           GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label text="Observaciones:" GridPane.rowIndex="4"/>
+                <TextArea fx:id="observacionesArea" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            </GridPane>
+            <Label text="Validación" styleClass="seccion-titulo"/>
+            <ListView fx:id="validacionList" prefHeight="100" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="8">
+            <padding>
+                <Insets bottom="12" left="14" right="14" top="8"/>
+            </padding>
+            <Label styleClass="ayuda" text="Las jornadas del diagrama vigente en el período quedan marcadas como licencia."/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button text="Cancelar" onAction="#onCancelar" cancelButton="true"/>
+            <Button fx:id="registrarButton" text="Registrar licencia" onAction="#onRegistrar" defaultButton="true"/>
+        </HBox>
+    </bottom>
+</BorderPane>

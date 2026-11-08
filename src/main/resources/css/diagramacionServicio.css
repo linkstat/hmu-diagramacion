@@ -1,0 +1,146 @@
+/* ============================================================
+ * Diagramación de servicio — estilos de la grilla y estados
+ *
+ * Convención semafórica del proyecto (ver bandejaMemorandums.css):
+ * verde = aprobado, marrón itálica = borrador. Se suman naranja
+ * (pendiente) y violeta (observado) para el ciclo del diagrama.
+ * ============================================================ */
+
+/* --- Chip de estado del diagrama --- */
+.estado-chip {
+    -fx-padding: 4 12 4 12;
+    -fx-background-radius: 12;
+    -fx-font-weight: bold;
+}
+
+.estado-chip.estado-borrador {
+    -fx-background-color: #efe5dc;
+    -fx-text-fill: #8B4513;
+    -fx-font-style: italic;
+}
+
+.estado-chip.estado-pendiente {
+    -fx-background-color: #fdebd0;
+    -fx-text-fill: #b9770e;
+}
+
+.estado-chip.estado-aprobado {
+    -fx-background-color: #d5f5e3;
+    -fx-text-fill: #1e8449;
+}
+
+.estado-chip.estado-observado {
+    -fx-background-color: #ebdef0;
+    -fx-text-fill: #7d3c98;
+}
+
+/* Chip compacto en tablas (bandeja de la OP, P02): mismo tamaño que en
+ * Novedades; el borrador va en gris, como estado sin trámite. */
+.estado-chip.chip-tabla {
+    -fx-padding: 2 10 2 10;
+    -fx-background-radius: 10;
+    -fx-font-size: 11;
+}
+
+.estado-chip.chip-tabla.estado-borrador {
+    -fx-background-color: #e5e7e9;
+    -fx-text-fill: #616a6b;
+    -fx-font-style: normal;
+}
+
+/* --- Banner de observación de OP --- */
+.observacion-banner {
+    -fx-background-color: #ebdef0;
+    -fx-background-radius: 4;
+}
+
+.observacion-titulo {
+    -fx-font-weight: bold;
+    -fx-text-fill: #7d3c98;
+}
+
+/* --- Celdas de la grilla por tipo de jornada --- */
+.celda-turno {
+    -fx-background-color: #e8f5e9;
+}
+
+.celda-guardia {
+    -fx-background-color: #e3f2fd;
+}
+
+.celda-guardia-pasiva {
+    -fx-background-color: #ede7f6;
+}
+
+.celda-franco {
+    -fx-text-fill: #9e9e9e;
+}
+
+.celda-franco-comp {
+    -fx-background-color: #fff8e1;
+}
+
+.celda-licencia {
+    -fx-background-color: #fff3e0;
+}
+
+/* Celda con violación detectada por el validador: borde rojo. */
+.celda-violacion {
+    -fx-border-color: #c0392b;
+    -fx-border-width: 2;
+}
+
+/* --- Panel de validación --- */
+.item-violacion {
+    -fx-text-fill: #c0392b;
+}
+
+.item-advertencia {
+    -fx-text-fill: #b9770e;
+}
+
+.ayuda {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-size: 11;
+}
+
+/* --- Vista calendario mensual --- */
+.calendario-scroll {
+    -fx-background-color: transparent;
+}
+
+.cal-header {
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-padding: 4 0 4 0;
+}
+
+.cal-dia {
+    -fx-border-color: #d5d8dc;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-padding: 4;
+    -fx-spacing: 2;
+    -fx-min-height: 76;
+}
+
+.cal-dia-finde {
+    -fx-background-color: #f4f6f6;
+}
+
+.cal-dia-fuera {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.cal-num {
+    -fx-font-weight: bold;
+    -fx-font-size: 11;
+    -fx-text-fill: #566573;
+}
+
+.cal-entry {
+    -fx-font-size: 10;
+    -fx-padding: 1 4 1 4;
+    -fx-background-radius: 3;
+}

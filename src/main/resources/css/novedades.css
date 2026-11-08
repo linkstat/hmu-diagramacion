@@ -1,0 +1,108 @@
+/* ============================================================
+ * Novedades (P03): bandeja, detalle e historial de instancias.
+ *
+ * Misma convención semafórica que diagramación: naranja = pendiente,
+ * violeta = observada, verde = aprobada, azul = aplicada, rojo =
+ * rechazada, marrón itálica = borrador, gris = anulada.
+ * ============================================================ */
+
+.titulo-pantalla {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+.subtitulo-perfil {
+    -fx-text-fill: #5d6d7e;
+}
+
+.ayuda {
+    -fx-text-fill: #5d6d7e;
+    -fx-font-size: 11;
+}
+
+.pie-contador {
+    -fx-text-fill: #5d6d7e;
+    -fx-font-size: 11;
+}
+
+/* --- Chip de estado --- */
+.estado-chip {
+    -fx-padding: 2 10 2 10;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+    -fx-font-size: 11;
+}
+
+.estado-chip.nov-borrador   { -fx-background-color: #efe5dc; -fx-text-fill: #8B4513; -fx-font-style: italic; }
+.estado-chip.nov-pendiente  { -fx-background-color: #fdebd0; -fx-text-fill: #b9770e; }
+.estado-chip.nov-observada  { -fx-background-color: #ebdef0; -fx-text-fill: #7d3c98; }
+.estado-chip.nov-aprobada   { -fx-background-color: #d5f5e3; -fx-text-fill: #1e8449; }
+.estado-chip.nov-aplicada   { -fx-background-color: #d6eaf8; -fx-text-fill: #21618c; }
+.estado-chip.nov-rechazada  { -fx-background-color: #fadbd8; -fx-text-fill: #922b21; }
+.estado-chip.nov-anulada    { -fx-background-color: #e5e7e9; -fx-text-fill: #616a6b; }
+
+/* --- Detalle --- */
+.detalle-titulo {
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+}
+
+.detalle-etiqueta {
+    -fx-text-fill: #5d6d7e;
+}
+
+.seccion-titulo {
+    -fx-font-weight: bold;
+}
+
+/* --- Resultado de cada instancia en el historial --- */
+.res-positivo   { -fx-text-fill: #1e8449; -fx-font-weight: bold; }
+.res-pendiente  { -fx-text-fill: #b9770e; -fx-font-weight: bold; }
+.res-observada  { -fx-text-fill: #7d3c98; -fx-font-weight: bold; }
+.res-rechazada  { -fx-text-fill: #922b21; -fx-font-weight: bold; }
+.res-sin-resolver { -fx-text-fill: #909497; }
+
+/* --- Panel de validación de la solicitud --- */
+.item-bloqueante {
+    -fx-text-fill: #c0392b;
+}
+
+.item-advertencia {
+    -fx-text-fill: #b9770e;
+}
+
+.item-ok {
+    -fx-text-fill: #1e8449;
+}
+
+.jornada-info {
+    -fx-text-fill: #21618c;
+}
+
+.no-leida {
+    -fx-font-weight: bold;
+}
+
+/* --- Reglas de validación (P12) --- */
+.estado-chip.sev-bloqueante  { -fx-background-color: #fadbd8; -fx-text-fill: #922b21; }
+.estado-chip.sev-advertencia { -fx-background-color: #fdebd0; -fx-text-fill: #b9770e; }
+.estado-chip.sev-inactiva    { -fx-background-color: #e5e7e9; -fx-text-fill: #616a6b; }
+
+/* --- Parte diario (P04) --- */
+.estado-chip.parte-abierto { -fx-background-color: #d6eaf8; -fx-text-fill: #21618c; }
+.estado-chip.parte-cerrado { -fx-background-color: #e5e7e9; -fx-text-fill: #424949; }
+.table-row-cell.sin-justificar .table-cell { -fx-text-fill: #c0392b; }
+.table-row-cell.sin-justificar { -fx-background-color: #fdedec; }
+.table-row-cell.sin-justificar:selected { -fx-background-color: #f5b7b1; }
+.table-row-cell.carga-manual .table-cell { -fx-font-style: italic; }
+
+/* --- Indicadores (P16): una serie, un tono (magnitud), marcas finas --- */
+.chart-bar { -fx-bar-fill: #2a78d6; -fx-background-radius: 0 4 4 0; }
+.chart-plot-background { -fx-background-color: transparent; }
+.chart-vertical-grid-lines { -fx-stroke: #e5e8e8; }
+.axis { -fx-tick-label-fill: #5d6d7e; }
+.table-row-cell.bajo-minimo .table-cell { -fx-text-fill: #c0392b; }
+
+/* --- Banco de horas --- */
+.table-row-cell.credito-vigente .table-cell { -fx-text-fill: #1e8449; }
+.table-row-cell.movimiento-vencido .table-cell { -fx-text-fill: #922b21; -fx-font-style: italic; }

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ar.com.hmu.controller.ModalidadHorariaController"
+            stylesheets="@../css/novedades.css">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="8">
+            <padding>
+                <Insets bottom="8" left="10" right="10" top="10"/>
+            </padding>
+            <Label text="Modalidad horaria" styleClass="titulo-pantalla"/>
+            <Label text="Asignación de la modalidad que rige la diagramación de cada agente" styleClass="subtitulo-perfil"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button text="Cerrar" onAction="#onCerrar" cancelButton="true"/>
+        </HBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.34">
+            <BorderPane.margin>
+                <Insets left="10" right="10"/>
+            </BorderPane.margin>
+            <VBox spacing="6">
+                <padding>
+                    <Insets right="6"/>
+                </padding>
+                <TextField fx:id="buscarField" promptText="Buscar por apellido, CUIL o servicio…"/>
+                <ListView fx:id="agentesList" VBox.vgrow="ALWAYS"/>
+            </VBox>
+            <VBox spacing="10">
+                <padding>
+                    <Insets left="10" right="6" top="2"/>
+                </padding>
+                <Label fx:id="agenteLabel" styleClass="detalle-titulo" text="Seleccione un agente"/>
+                <Label text="Modalidad vigente" styleClass="seccion-titulo"/>
+                <Label fx:id="vigenteLabel" wrapText="true" styleClass="jornada-info"/>
+                <Label text="Nueva modalidad" styleClass="seccion-titulo"/>
+                <GridPane hgap="10" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="200" prefWidth="200"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+                    <Label text="Modalidad:" GridPane.rowIndex="0"/>
+                    <ComboBox fx:id="modalidadCombo" prefWidth="280" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <Label fx:id="descripcionLabel" wrapText="true" styleClass="detalle-etiqueta"
+                           GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                </GridPane>
+                <GridPane fx:id="parametrosGrid" hgap="10" vgap="6">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="200" prefWidth="200"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+                </GridPane>
+                <GridPane hgap="10" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="200" prefWidth="200"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+                    <Label text="Rige desde:" GridPane.rowIndex="0"/>
+                    <DatePicker fx:id="desdePicker" prefWidth="140" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <Label text="Franquicia:" GridPane.rowIndex="1"/>
+                    <HBox spacing="8" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <CheckBox fx:id="franquiciaCheck" text="Con franquicia de"/>
+                        <TextField fx:id="franquiciaHorasField" prefWidth="50" text="1"/>
+                        <Label text="h diarias hasta el"/>
+                        <DatePicker fx:id="franquiciaHastaPicker" prefWidth="140"/>
+                    </HBox>
+                </GridPane>
+                <Label fx:id="avisoLabel" wrapText="true" styleClass="item-advertencia" visible="false" managed="false"/>
+                <HBox alignment="CENTER_RIGHT">
+                    <Button fx:id="asignarButton" text="Asignar modalidad" onAction="#onAsignar" defaultButton="true"/>
+                </HBox>
+            </VBox>
+        </SplitPane>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_LEFT">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="6"/>
+            </padding>
+            <Label styleClass="ayuda"
+                   text="La modalidad anterior se cierra el día previo a la nueva. La generación de la grilla y el motor de validación usan la modalidad vigente."/>
+        </HBox>
+    </bottom>
+</BorderPane>

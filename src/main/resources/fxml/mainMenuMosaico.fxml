@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ar.com.hmu.controller.MainMenuMosaicoController">
+   <bottom>
+      <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="480.0">
+               <children>
+                  <Button fx:id="logoutButton" mnemonicParsing="false" text="Cerrar sesión">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="avisosButton" mnemonicParsing="false" text="Avisos">
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <ImageView fx:id="serverStatusIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../images/serverStatus_icon_blue_question.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="serverStatusLabel" text="Estado de conexión del servidor">
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <opaqueInsets>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </opaqueInsets>
+      </VBox>
+   </bottom>
+   <top>
+      <VBox BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <MenuBar fx:id="menuBar">
+              <menus>
+                <Menu mnemonicParsing="false" text="Archivo">
+                  <items>
+                    <MenuItem fx:id="changePasswordMenuItem" mnemonicParsing="false" text="Modificar contraseña" />
+                        <MenuItem fx:id="changeProfileImageMenuItem" mnemonicParsing="false" text="Modificar imagen de perfil" />
+                        <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" text="Cerrar sesión" />
+                        <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="Salir" />
+                  </items>
+                </Menu>
+                  <Menu fx:id="empleadoMenu" mnemonicParsing="false" text="Agente">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Control de marcaciones" />
+                        <MenuItem fx:id="notasMemosMenuItem" mnemonicParsing="false" text="Notas y Memorandums" />
+                        <MenuItem fx:id="pasesSalidaMenuItem" mnemonicParsing="false" text="Gestión de Pases de Salida" />
+                        <MenuItem fx:id="omisionMenuItem" mnemonicParsing="false" text="Omisión de Ingreso/Egreso" />
+                        <Menu fx:id="inasistenciasMenu" mnemonicParsing="false" text="Inasistencias">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Faltas Justificadas" />
+                              <MenuItem mnemonicParsing="false" text="Faltas Injustificadas" />
+                              <MenuItem mnemonicParsing="false" text="Faltas por razón de Fuerza Mayor" />
+                           </items>
+                        </Menu>
+                        <Menu fx:id="francosMenu" mnemonicParsing="false" text="Francos Compensatorios">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Solicitud de Horas Extra p/FC" />
+                              <MenuItem mnemonicParsing="false" text="Gestión de Francos Compensatorios" />
+                           </items>
+                        </Menu>
+                     </items>
+                  </Menu>
+                  <Menu fx:id="jefaturaDeServicioMenu" mnemonicParsing="false" text="Jefatura de Servicio">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Aprobación de Solicitudes" />
+                        <MenuItem mnemonicParsing="false" text="Diagramación de mi Servicio" />
+                        <MenuItem fx:id="reportesJSMenuItem" mnemonicParsing="false" text="Módulo de Reportes" />
+                        <MenuItem fx:id="listadoMisAgentesMenuItem" mnemonicParsing="false" text="Listado de mis Agentes" />
+                     </items>
+                  </Menu>
+                <Menu fx:id="oficinaDePersonalMenu" mnemonicParsing="false" text="Oficina de Personal">
+                  <items>
+                        <MenuItem mnemonicParsing="false" text="Aprobación de Solicitudes" />
+                    <MenuItem mnemonicParsing="false" text="Módulo de Partes Diarios" />
+                      <Menu mnemonicParsing="false" text="Reportes">
+                        <items>
+                              <MenuItem fx:id="reportesOPMenuItem" mnemonicParsing="false" text="Módulo de Reportes" />
+                              <MenuItem fx:id="listadoEmpleadosMenuItem" mnemonicParsing="false" text="Listado de Agentes" />
+                              <MenuItem fx:id="listadoServiciosMenuItem" mnemonicParsing="false" text="Listado de Servicios" />
+                              <MenuItem mnemonicParsing="false" text="Consulta de Diagramas de Servicios" />
+                        </items>
+                      </Menu>
+                        <Menu mnemonicParsing="false" text="Altas, Bajas y Modificaciones">
+                           <items>
+                              <MenuItem fx:id="abmEmpleadosMenuItem" mnemonicParsing="false" text="ABM de Agentes" />
+                              <MenuItem fx:id="abmServiciosMenuItem" mnemonicParsing="false" text="ABM de Servicios" />
+                              <MenuItem fx:id="abmCargosMenuItem" mnemonicParsing="false" text="ABM de Cargos" />
+                              <MenuItem mnemonicParsing="false" text="ABM de Códigos de Novedades" />
+                           </items>
+                        </Menu>
+                        <MenuItem fx:id="feriadosOPMenuItem" mnemonicParsing="false" text="Feriados…" />
+                        <MenuItem fx:id="reglasOPMenuItem" mnemonicParsing="false" text="Reglas de validación…" />
+                        <MenuItem fx:id="modalidadOPMenuItem" mnemonicParsing="false" text="Modalidad horaria de agentes…" />
+                        <MenuItem fx:id="importarPadronMenuItem" mnemonicParsing="false" text="Importar listado de agentes…" />
+                        <MenuItem fx:id="rolesMenuItem" mnemonicParsing="false" text="Roles con vigencia…" />
+                  </items>
+                </Menu>
+                  <Menu fx:id="direccionMenu" mnemonicParsing="false" text="Dirección">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Aprobación de Solicitudes" />
+                        <MenuItem fx:id="listadoAgentesDHMenuItem" mnemonicParsing="false" text="Listado de Agentes" />
+                        <MenuItem mnemonicParsing="false" text="Listado de Servicios" />
+                        <MenuItem mnemonicParsing="false" text="Consulta de Diagramas de Servicios" />
+                        <MenuItem fx:id="reportesDHMenuItem" mnemonicParsing="false" text="Módulo de Reportes" />
+                        <MenuItem fx:id="feriadosDireccionMenuItem" mnemonicParsing="false" text="Feriados…" />
+                        <MenuItem fx:id="reglasDireccionMenuItem" mnemonicParsing="false" text="Reglas de validación…" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Ayuda">
+                     <items>
+                        <MenuItem fx:id="licenciasDeUsoMenuItem" mnemonicParsing="false" text="Licencias de uso" />
+                        <MenuItem fx:id="acercaDeMenuItem" mnemonicParsing="false" text="Acerca de Aromito" />
+                     </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="agentProfileImage" fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/loginImage.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <GridPane alignment="CENTER_LEFT">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
+                      <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints valignment="BASELINE" vgrow="NEVER" />
+                      <RowConstraints valignment="BASELINE" vgrow="NEVER" />
+                      <RowConstraints valignment="BASELINE" vgrow="NEVER" />
+                    </rowConstraints>
+                     <HBox.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </HBox.margin>
+                     <children>
+                        <Label alignment="TOP_LEFT" text="AGENTE" textAlignment="RIGHT" textFill="GREY">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets right="4.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Text fx:id="agentFullNameText" stroke="BLUE" strokeWidth="0.2" text="APELLIDOS, Nombres" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="4.0" />
+                           </GridPane.margin>
+                        </Text>
+                        <Label alignment="TOP_LEFT" text="SERVICIO" textAlignment="RIGHT" textFill="GREY" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets right="4.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Text fx:id="agentServiceText" layoutX="67.0" layoutY="41.0" stroke="GREY" strokeWidth="0.2" text="Nombre del Servicio" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold Italic" size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="4.0" />
+                           </GridPane.margin>
+                        </Text>
+                        <Label alignment="TOP_LEFT" layoutX="20.0" layoutY="18.0" text="CARGO" textAlignment="RIGHT" textFill="GREY" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets right="4.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Text fx:id="agentCargoText" layoutX="67.0" layoutY="63.0" stroke="RED" strokeWidth="0.1" text="0000" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="4.0" />
+                           </GridPane.margin>
+                        </Text>
+                     </children>
+                  </GridPane>
+                  <ScrollPane fitToWidth="true" HBox.hgrow="ALWAYS">
+                     <content>
+                        <VBox alignment="TOP_RIGHT">
+                           <children>
+                              <Label alignment="TOP_RIGHT" layoutX="252.0" layoutY="14.0" text="Datos de conexión actual:" textAlignment="RIGHT" textFill="GREY">
+                                 <font>
+                                    <Font name="System Bold" size="10.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="8.0" />
+                                 </padding>
+                              </Label>
+                              <Text fx:id="currentConnDateTimeText" layoutX="290.0" layoutY="42.0" stroke="RED" strokeWidth="0.1" text="vie 04, oct 2024 23:40 Hs" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="currentConnHostnameText" layoutX="58.0" layoutY="89.0" stroke="RED" strokeWidth="0.1" text="inv.553.urgencias.local" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="currentConnIPAddressText" layoutX="172.0" layoutY="66.0" stroke="RED" strokeWidth="0.1" text="10.22.9.2" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="TOP_RIGHT" text="Datos de conexión anterior:" textAlignment="RIGHT" textFill="GREY">
+                                 <font>
+                                    <Font name="System Bold" size="10.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="8.0" />
+                                 </padding>
+                              </Label>
+                              <Text fx:id="prevConnDateTimeText" stroke="RED" strokeWidth="0.1" text="—" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="289.0" layoutY="42.0" stroke="RED" strokeWidth="0.1" fx:id="prevConnHostText" text="" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true">
+         <content>
+            <TilePane hgap="24.0" prefColumns="1" prefHeight="480.0" prefRows="1" prefWidth="720.0" styleClass="panel" stylesheets="@../css/MainMenuMosaicoStd.css" vgap="16.0">
+               <children>
+                  <VBox fx:id="aprobacionSolicitudesVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_aprobacion_solicitudes.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Novedades" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                        <Label fx:id="novedadesCountLabel" text="" textAlignment="CENTER" style="-fx-text-fill: #c33; -fx-font-weight: bold; -fx-font-size: 11;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="notasMemosVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_notas_memos.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Notas y Memorandums" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                        <Label fx:id="memosCountLabel" text="" textAlignment="CENTER" style="-fx-text-fill: #c33; -fx-font-weight: bold; -fx-font-size: 11;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="partesDiariosVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_partes_diarios.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Módulo de Partes Diarios" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                     <TilePane.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox fx:id="consultaDiagramasDeServicioVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_consulta_diagramas_de_servicios.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Consulta de Diagramas de Servicios" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                     <TilePane.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox fx:id="diagramacionDeServicioVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_diagramacion_de_servicio.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color opacity="0.7442747950553894" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Diagramación de mi Servicio" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                     <TilePane.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox fx:id="miDiagramaVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_consulta_diagramas_de_servicios.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Mi Diagrama" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                     <TilePane.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox fx:id="controlMarcacionesVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_control_marcaciones.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Marcaciones" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                     <TilePane.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox fx:id="pasesDeSalidaVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_gestion_pases_de_salida.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Pases de Salida" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                     <TilePane.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox fx:id="omisionesIngresEgresoVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_omision_ingreso-egreso.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Omisiones de Ingreso / Egreso" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                     <TilePane.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox fx:id="faltasJustificadasVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_falta_justificada.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Faltas Justificadas" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                     <TilePane.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox fx:id="faltasInjustificadasVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_falta_injustificada.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Faltas Injustificadas" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                     <TilePane.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox fx:id="faltasRazonFuerzaMayorVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_falta_por_fuerza_mayor.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Faltas por razón de Fuerza Mayor" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="solicitudHorasExtraFCVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_solicitud_horas_extra.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Solicitud de Horas Extra p/FC" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="francosCompensatoriosVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_francos_compensatorios.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" fx:id="francosText" text="Gestión de Francos Compensatorios" textAlignment="CENTER" wrappingWidth="124.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="reportesVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_reportes.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" fx:id="reportesText" text="Módulo de Reportes" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="listadoDeEmpleadosVBox" alignment="TOP_CENTER" onMouseClicked="#handleListadoDeEmpleados" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_listado_usuarios.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Listado de Agentes" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                     <TilePane.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox fx:id="abmEmpleadosVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_ABM_agentes.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="ABM de Agentes" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                     <TilePane.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox fx:id="listadoDeServiciosVBox" alignment="TOP_CENTER" onMouseClicked="#handleListadoDeServicios" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_listado_servicios.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="Listado de Servicios" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                     <TilePane.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox fx:id="abmServiciosVBox" alignment="TOP_CENTER" styleClass="mosaic">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="mosaicImage">
+                           <image>
+                              <Image url="@../images/mosaic_ABM_servcios.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Text stroke="GREY" strokeWidth="0.2" text="ABM de Servicios" textAlignment="CENTER" wrappingWidth="112.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets top="8.0" />
+               </padding>
+            </TilePane>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

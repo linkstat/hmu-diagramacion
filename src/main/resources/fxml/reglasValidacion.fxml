@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ar.com.hmu.controller.ReglasValidacionController"
+            stylesheets="@../css/novedades.css">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="8">
+            <padding>
+                <Insets bottom="8" left="10" right="10" top="10"/>
+            </padding>
+            <Label text="Reglas de validación" styleClass="titulo-pantalla"/>
+            <Label text="Parámetros del motor de validación, con vigencia" styleClass="subtitulo-perfil"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Label text="Vigentes al:"/>
+            <DatePicker fx:id="fechaPicker" prefWidth="130"/>
+            <Button text="Refrescar" onAction="#onRefrescar"/>
+            <Button text="Cerrar" onAction="#onCerrar" cancelButton="true"/>
+        </HBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.56">
+            <BorderPane.margin>
+                <Insets left="10" right="10"/>
+            </BorderPane.margin>
+            <TableView fx:id="reglasTable">
+                <columns>
+                    <TableColumn fx:id="codigoCol" prefWidth="130" text="CÓDIGO"/>
+                    <TableColumn fx:id="nombreCol" prefWidth="210" text="NOMBRE"/>
+                    <TableColumn fx:id="ambitoCol" prefWidth="80" text="ÁMBITO"/>
+                    <TableColumn fx:id="severidadCol" prefWidth="104" text="SEVERIDAD"/>
+                    <TableColumn fx:id="parametrosCol" prefWidth="140" text="PARÁMETROS"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/>
+                </columnResizePolicy>
+            </TableView>
+            <VBox spacing="8">
+                <padding>
+                    <Insets left="8" right="4" top="2"/>
+                </padding>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label fx:id="tituloLabel" styleClass="detalle-titulo" text="Seleccione una regla"/>
+                    <Label fx:id="severidadChip" styleClass="estado-chip" visible="false"/>
+                </HBox>
+                <Label fx:id="descripcionLabel" wrapText="true"/>
+                <Label fx:id="modalidadLabel" styleClass="detalle-etiqueta"/>
+                <Label text="Nueva versión" styleClass="seccion-titulo"/>
+                <GridPane fx:id="parametrosGrid" hgap="10" vgap="6">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150" prefWidth="150"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+                </GridPane>
+                <GridPane hgap="10" vgap="6">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150" prefWidth="150"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+                    <Label text="Severidad:" GridPane.rowIndex="0"/>
+                    <ComboBox fx:id="severidadCombo" prefWidth="170" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <Label text="Estado:" GridPane.rowIndex="1"/>
+                    <CheckBox fx:id="activaCheck" text="Activa (el motor la evalúa)" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <Label text="Rige desde:" GridPane.rowIndex="2"/>
+                    <DatePicker fx:id="desdePicker" prefWidth="140" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                </GridPane>
+                <Label fx:id="avisoLabel" wrapText="true" styleClass="item-advertencia" visible="false" managed="false"/>
+                <HBox alignment="CENTER_RIGHT">
+                    <Button fx:id="registrarButton" text="Registrar nueva versión" onAction="#onRegistrar" defaultButton="true"/>
+                </HBox>
+                <Label text="Versiones" styleClass="seccion-titulo"/>
+                <TableView fx:id="versionesTable" VBox.vgrow="ALWAYS" prefHeight="160">
+                    <columns>
+                        <TableColumn fx:id="vDesdeCol" prefWidth="90" text="DESDE"/>
+                        <TableColumn fx:id="vHastaCol" prefWidth="90" text="HASTA"/>
+                        <TableColumn fx:id="vSeveridadCol" prefWidth="100" text="SEVERIDAD"/>
+                        <TableColumn fx:id="vParametrosCol" prefWidth="150" text="PARÁMETROS"/>
+                        <TableColumn fx:id="vActivaCol" prefWidth="70" text="ACTIVA"/>
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/>
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+        </SplitPane>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="8">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="6"/>
+            </padding>
+            <Label fx:id="ayudaLabel" styleClass="ayuda"
+                   text="Los cambios rigen desde la fecha indicada, sin recompilar: la versión anterior se cierra el día previo. Los diagramas aprobados conservan la versión con la que fueron validados."/>
+        </HBox>
+    </bottom>
+</BorderPane>
