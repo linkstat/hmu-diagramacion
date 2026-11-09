@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Planificación del proyecto" company="" webLink="" view-date="2026-08-10" view-index="0" gantt-divider-location="679" resource-divider-location="300" version="3.3.3322" locale="es_ES">
+    <description/>
+    <view zooming-state="default:6" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="395" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="81" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="81" order="2"/>
+        <field id="tpd6" name="Duración" width="35" order="3"/>
+        <field id="tpd9" name="Antecesores" width="86" order="4"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nombre" width="149" order="0"/>
+        <field id="1" name="Función" width="147" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="1" uid="e6b4ff8ce5e74e428e81b57eac2fba10" name="Fase de Inicio" color="#3a5f8a" meeting="false" start="2026-08-17" duration="15" complete="0" expand="true">
+            <notes><![CDATA[Fase del PUD]]></notes>
+            <task id="2" uid="43b75c6bf8694fb48d6555ced5a7f388" name="Relevamiento inicial de la organización y de sus procesos" color="#8cb6ce" meeting="false" start="2026-08-17" duration="9" complete="0" expand="true">
+                <depend id="3" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="3" uid="742d26e3f7594f72b6c32d34e6ccbbab" name="Definición del área problemática y de los antecedentes" color="#8cb6ce" meeting="false" start="2026-08-28" duration="2" complete="0" expand="true">
+                <depend id="4" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="4" uid="e789e1549b2e40cda09e231bba89d664" name="Justificación, objetivos y marco teórico" color="#8cb6ce" meeting="false" start="2026-09-01" duration="2" complete="0" expand="true">
+                <depend id="5" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="5" uid="f4debee87e904b61a5a9959d3b9cddf9" name="Diseño metodológico y proceso de negocio" color="#8cb6ce" meeting="false" start="2026-09-03" duration="1" complete="0" expand="true">
+                <depend id="6" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="6" uid="5466aa4ccc60499f8614fd8f84fd67f1" name="Revisión integral de la definición del proyecto" color="#8cb6ce" meeting="false" start="2026-09-04" duration="1" complete="0" expand="true">
+                <depend id="7" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="7" uid="51e33ffd4f2d4e789e17b46bec20a147" name="Relevamiento validado" color="#000000" meeting="true" start="2026-09-07" duration="0" complete="0" expand="true">
+                <depend id="9" type="2" difference="1" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="8" uid="61fbf092fc9b4b178d5aa1ba6eed411f" name="Fase de Elaboración" color="#3a5f8a" meeting="false" start="2026-09-08" duration="29" complete="0" expand="true">
+            <notes><![CDATA[Fase del PUD]]></notes>
+            <task id="9" uid="a7d111b9076443bcad2912ee573e9d23" name="Diagnóstico de los procesos relevados y propuesta de solución" color="#8cb6ce" meeting="false" start="2026-09-08" duration="4" complete="0" expand="true">
+                <depend id="10" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="10" uid="59326d46a89d4fc8a4428eaee01c21f1" name="Análisis y diseño del sistema" color="#8cb6ce" meeting="false" start="2026-09-14" duration="7" complete="0" expand="true">
+                <depend id="11" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="11" uid="2e687ea02aad40ea8d57896121de66a6" name="Interfaces del sistema" color="#8cb6ce" meeting="false" start="2026-09-23" duration="3" complete="0" expand="true">
+                <depend id="12" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="12" uid="ac8229e926264c079f2fa10a26267cd5" name="Gestión de la seguridad" color="#8cb6ce" meeting="false" start="2026-09-28" duration="6" complete="0" expand="true">
+                <depend id="13" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="13" uid="a48de89d34f34abb974cf79dbd36b992" name="Análisis de costos y de riesgos" color="#8cb6ce" meeting="false" start="2026-10-06" duration="6" complete="0" expand="true">
+                <depend id="14" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="14" uid="e0756b7172dc42d2b8efcb655dad8e1b" name="Revisión de consistencia del análisis y del diseño" color="#8cb6ce" meeting="false" start="2026-10-14" duration="3" complete="0" expand="true">
+                <depend id="15" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="15" uid="1d74af1f90f44791b2d94166bca38608" name="Arquitectura definida" color="#000000" meeting="true" start="2026-10-19" duration="0" complete="0" expand="true">
+                <depend id="17" type="2" difference="1" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="16" uid="34e9f58ac974478f95db91ea3136d476" name="Fase de Construcción" color="#3a5f8a" meeting="false" start="2026-10-20" duration="14" complete="0" expand="true">
+            <notes><![CDATA[Fase del PUD]]></notes>
+            <task id="17" uid="f922603d7bb042a7b0d91700e46f069b" name="Configuración del entorno y del modelo de datos" color="#8cb6ce" meeting="false" start="2026-10-20" duration="4" complete="0" expand="true">
+                <depend id="18" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="18" uid="970d7e6c811f4c2b9a3bbd2cac29cc5b" name="Motor de validación y diagramación mensual" color="#8cb6ce" meeting="false" start="2026-10-26" duration="5" complete="0" expand="true">
+                <depend id="19" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="19" uid="782bd91fcd7644c6bb69abcae3ecc284" name="Flujo trazable de novedades e indicadores" color="#8cb6ce" meeting="false" start="2026-11-02" duration="4" complete="0" expand="true">
+                <depend id="20" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="20" uid="67bd6a6e0033432383074f3ce87ad8e9" name="Pruebas integrales y ajustes finales" color="#8cb6ce" meeting="false" start="2026-11-06" duration="1" complete="0" expand="true">
+                <depend id="21" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="21" uid="af90cf3ea0c64485a78bc5b3b9791eb5" name="Sistema en funcionamiento" color="#000000" meeting="true" start="2026-11-09" duration="0" complete="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
