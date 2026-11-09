@@ -1,9 +1,9 @@
 -- ============================================================================
--- Revierte el seed de capturas (seed_capturas.sql + seed_capturas_base.sql):
+-- Revierte el escenario de demostración (03_escenario_demo.sql + _base.sql):
 -- borra SOLO lo cargado por el seed (prefijos de300000- y de400000-) y los
 -- diagramas del servicio demo "Guardia Central". No toca datos preexistentes.
 --
--- Uso: psql -h <host> -U aromito -d aromito -f sql/seed_capturas_revertir.sql
+-- Uso: psql -h <host> -U hmu_diagramacion -d hmu_diagramacion -f sql/03_escenario_demo_revertir.sql
 -- ============================================================================
 BEGIN;
 

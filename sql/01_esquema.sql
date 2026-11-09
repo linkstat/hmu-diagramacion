@@ -1,10 +1,7 @@
 /* ============================================================================
- * Aromito - DDL completo (PostgreSQL 18)
+ * HMU Diagramación - DDL completo (PostgreSQL 18)
  *
- * Crea el esquema completo en una base vacía. Coincide con una base migrada
- * con sql/aromito_alter_*.sql hasta aromito_alter_uniformidad_e4.sql (se
- * comprueba con pg_dump --schema-only de ambas). Especificación:
- * docs/e4/04-diccionario-de-datos.md.
+ * Crea el esquema completo en una base vacía.
  *
  * Convenciones:
  *  - Clave primaria id UUID DEFAULT gen_random_uuid() en todas las tablas
@@ -26,8 +23,7 @@
  *    (redundancia consciente, ver CLAUDE.md).
  *
  * Para regenerar desde cero:
- *   psql -d aromito -f aromito_borrado_preinit.sql
- *   psql -d aromito -f aromito_creacion_de_tablas.sql
+ *   psql -d hmu_diagramacion -f sql/01_esquema.sql
  * ========================================================================== */
 
 
@@ -281,7 +277,7 @@ CREATE TABLE AsignacionRol (
 
 
 /* ----------------------------------------------------------------------------
- * Autorización (heredada, sin uso en el E4) y EstadoTramite (memos)
+ * Autorización (heredada, sin uso) y EstadoTramite (memos)
  * -------------------------------------------------------------------------- */
 CREATE TABLE Autorizacion (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -300,7 +296,7 @@ INSERT INTO EstadoTramite (nombre) VALUES
 
 
 /* ----------------------------------------------------------------------------
- * Novedades (E4: CU20–CU29, Tablas 52–54)
+ * Novedades (CU20–CU29)
  *
  * Circuito por instancias (NovedadAutorizacion): JS, o DH si el agente es JS
  * -> OP -> DH, más la Secretaría de Salud al superar el tope de faltas
@@ -485,7 +481,7 @@ CREATE TABLE Novedad (
     CONSTRAINT chk_novedad_fechas CHECK (fechaHasta >= fechaDesde)
 );
 
--- Heredada de la etapa anterior (N:M); sin uso en el E4.
+-- Heredada de la etapa anterior (N:M); sin uso.
 CREATE TABLE Agente_Novedad (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     agenteID UUID NOT NULL REFERENCES Agente(id),
@@ -612,7 +608,7 @@ CREATE TABLE JornadaLaboral (
 
 
 /* ----------------------------------------------------------------------------
- * Memorandos (fuera del alcance del E4)
+ * Memorandos (fuera del alcance del prototipo)
  * -------------------------------------------------------------------------- */
 CREATE TABLE Memorandum (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -653,7 +649,7 @@ CREATE TABLE Memorandum_Autorizacion (
 
 
 /* ----------------------------------------------------------------------------
- * Compensaciones heredadas (sin uso en el E4: el banco de horas es
+ * Compensaciones heredadas (sin uso: el banco de horas es
  * MovimientoHoras). jefaturaID: agente con rol de jefatura.
  * -------------------------------------------------------------------------- */
 CREATE TABLE FrancoCompensatorio (
@@ -683,7 +679,7 @@ CREATE TABLE HoraExtra (
 
 
 /* ----------------------------------------------------------------------------
- * Marcaciones, cotejo y parte diario (E4: CU30–CU35, Tablas 55–57)
+ * Marcaciones, cotejo y parte diario (CU30–CU35)
  * -------------------------------------------------------------------------- */
 -- LoteMarcaciones (Tabla 55): cada archivo importado del sistema de relojes.
 CREATE TABLE LoteMarcaciones (
@@ -736,7 +732,7 @@ CREATE TABLE ParteDiario (
     version INTEGER NOT NULL DEFAULT 0
 );
 
--- Heredada (N:M); sin uso en el E4: el detalle es ParteDiarioDetalle.
+-- Heredada (N:M); sin uso: el detalle es ParteDiarioDetalle.
 CREATE TABLE ParteDiario_Agente (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     parteDiarioID UUID NOT NULL REFERENCES ParteDiario(id),
@@ -766,7 +762,7 @@ CREATE TABLE ParteDiarioDetalle (
 
 
 /* ----------------------------------------------------------------------------
- * Reglas de validación parametrizadas (E4: CU08, Tabla 49)
+ * Reglas de validación parametrizadas (CU08)
  * -------------------------------------------------------------------------- */
 CREATE TABLE ReglaValidacion (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -837,7 +833,7 @@ VALUES ('RV-COTEJO-TOLER', 'Tolerancia del cotejo de asistencia',
         'Minutos de tolerancia para el ingreso y el egreso respecto de la jornada diagramada.',
         'ASISTENCIA', NULL, 'ADVERTENCIA', '{"toleranciaMinutos": 5}', '2026-01-01');
 
--- Banco de horas, francos compensatorios y pases (ver aromito_alter_banco_horas_pases.sql).
+-- Banco de horas, francos compensatorios y pases.
 INSERT INTO ReglaValidacion (codigo, nombre, descripcion, ambito, modalidad, severidad, parametros, vigenteDesde)
 VALUES
  ('RV-HE-COMPUTO', 'Cómputo de horas extras para FC',
@@ -997,7 +993,7 @@ CREATE INDEX idx_asignacionrol_usuario ON AsignacionRol(usuarioID);
 
 
 /* ----------------------------------------------------------------------------
- * Auditoría por disparadores (E4: RNF03, Tabla 58)
+ * Auditoría por disparadores (RNF03)
  *
  * EventoAuditoria es de sólo inserción; fn_auditoria registra quién
  * (app.usuario_id, fijada por la aplicación con set_config(..., true) en cada
@@ -1106,7 +1102,7 @@ CREATE TRIGGER trg_updated_at BEFORE UPDATE ON DiagramaDeServicio FOR EACH ROW E
 
 
 /* ----------------------------------------------------------------------------
- * Vistas de indicadores (E4: CU36). Ver aromito_vistas_indicadores.sql.
+ * Vistas de indicadores (CU36).
  * -------------------------------------------------------------------------- */
 CREATE OR REPLACE VIEW v_indicador_ausentismo AS
 SELECT p.fecha,

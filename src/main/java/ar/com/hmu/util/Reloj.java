@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 /**
  * Fecha de referencia de la aplicación. Por defecto es la del sistema; con
- * {@code -Daromito.hoy=AAAA-MM-DD} se fija otra (modo de capturas y demos:
+ * {@code -Dhmu.hoy=AAAA-MM-DD} se fija otra (modo de capturas y demos:
  * el escenario del seed transcurre en octubre de 2026).
  */
 public final class Reloj {
@@ -15,7 +15,7 @@ public final class Reloj {
     private static LocalTime horaFija;
 
     static {
-        String p = System.getProperty("aromito.hoy");
+        String p = System.getProperty("hmu.hoy");
         if (p != null && !p.isBlank()) {
             fija = LocalDate.parse(p.trim());
         }

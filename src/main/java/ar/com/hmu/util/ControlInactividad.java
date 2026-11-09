@@ -18,7 +18,7 @@ import java.util.List;
  * Cierre de sesión por inactividad (RNF01, CU01): cualquier evento de
  * teclado o mouse en cualquier ventana de la aplicación cuenta como
  * actividad; al cumplirse el plazo (30 minutos; {@code
- * -Daromito.inactividad.minutos} lo cambia para demostraciones) se cierran
+ * -Dhmu.inactividad.minutos} lo cambia para demostraciones) se cierran
  * las ventanas secundarias y se vuelve al inicio de sesión.
  */
 public final class ControlInactividad {
@@ -37,7 +37,7 @@ public final class ControlInactividad {
     }
 
     public static long minutosLimite() {
-        return Long.getLong("aromito.inactividad.minutos", 30L);
+        return Long.getLong("hmu.inactividad.minutos", 30L);
     }
 
     public static void registrarActividad() {

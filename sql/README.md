@@ -1,1 +1,1 @@
-Scripts SQL de PostgreSQL 18: DDL completo, vistas de indicadores y datos de prueba (seed).
+Scripts SQL (PostgreSQL 18), en orden de ejecución: 01_esquema.sql (tablas, disparadores de auditoría, vistas y catálogos), 02_datos_prueba.sql (padrón ficticio) y 03_escenario_demo.sql (escenario de demostración; incluye a 03_escenario_demo_base.sql y 03_escenario_demo_revertir.sql).

@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ar.com.hmu</groupId>
-    <artifactId>aromito</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>hmu-diagramacion</artifactId>
+    <version>1.0.0</version>
 
     <properties>
         <!-- Java version -->
@@ -152,6 +152,7 @@
     </repositories>
 
     <build>
+        <finalName>hmu-diagramacion</finalName>
         <plugins>
             <!-- Plugin de compilación de JDK para Maven -->
             <plugin>
@@ -168,7 +169,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
             </plugin>
-            <!-- Jar ejecutable con todas las dependencias (java -jar ...-ejecutable.jar).
+            <!-- mvn package deja en target/hmu-diagramacion.jar el jar ejecutable
+                 con todas las dependencias (java -jar hmu-diagramacion.jar).
                  Las natives de JavaFX son las del OS de build (o -Djavafx.platform=win). -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -181,8 +183,6 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <shadedArtifactAttached>true</shadedArtifactAttached>
-                            <shadedClassifierName>ejecutable</shadedClassifierName>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <filters>
                                 <filter>

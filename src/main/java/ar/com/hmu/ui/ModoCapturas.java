@@ -53,15 +53,15 @@ import java.util.stream.Collectors;
 
 /**
  * Modo de desarrollo para las capturas del documento del TFG
- * ({@code --capturas} o {@code -Daromito.capturas}): sin iniciar sesión y
+ * ({@code --capturas} o {@code -Dhmu.capturas}): sin iniciar sesión y
  * sin enviar correos, abre cada pantalla de PANTALLAS.md con los datos del
  * seed ({@code sql/seed_capturas.sql}), la lleva al estado definido y guarda
  * un PNG de 1600×900 con {@code Node.snapshot}. Los diálogos se componen
  * centrados sobre su ventana, como se ven en pantalla. No modifica datos.
  *
- * <p>Opciones (propiedades del sistema): {@code aromito.hoy} (fecha de
- * referencia, por defecto 2026-10-07, a las 08:15), {@code aromito.capturas.salida}
- * (por defecto ~/demo/capturas) y {@code aromito.capturas.solo} (lista de
+ * <p>Opciones (propiedades del sistema): {@code hmu.hoy} (fecha de
+ * referencia, por defecto 2026-10-07, a las 08:15), {@code hmu.capturas.salida}
+ * (por defecto ~/demo/capturas) y {@code hmu.capturas.solo} (lista de
  * ids separados por coma, p. ej. {@code P03,P12}).</p>
  */
 public final class ModoCapturas {
@@ -116,7 +116,7 @@ public final class ModoCapturas {
     }
 
     static boolean solicitado(List<String> args) {
-        return args.contains("--capturas") || System.getProperty("aromito.capturas") != null;
+        return args.contains("--capturas") || System.getProperty("hmu.capturas") != null;
     }
 
     static void ejecutar(Stage primaryStage, List<String> args) throws IOException {
@@ -124,11 +124,11 @@ public final class ModoCapturas {
         // Entre una captura y otra puede no quedar ninguna ventana abierta.
         Platform.setImplicitExit(false);
         // Hora fija: las capturas muestran siempre las 08:15 del día simulado.
-        Reloj.fijar(LocalDate.parse(System.getProperty("aromito.hoy", "2026-10-07")), java.time.LocalTime.of(8, 15));
-        Path salida = Path.of(System.getProperty("aromito.capturas.salida",
+        Reloj.fijar(LocalDate.parse(System.getProperty("hmu.hoy", "2026-10-07")), java.time.LocalTime.of(8, 15));
+        Path salida = Path.of(System.getProperty("hmu.capturas.salida",
                 System.getProperty("user.home") + "/demo/capturas"));
         Files.createDirectories(salida);
-        String filtro = System.getProperty("aromito.capturas.solo", "");
+        String filtro = System.getProperty("hmu.capturas.solo", "");
         Set<String> solo = filtro.isBlank() ? Set.of()
                 : Arrays.stream(filtro.split(",")).map(String::trim).collect(Collectors.toSet());
         ModoCapturas m = new ModoCapturas(ContextoAplicacion.crear(new CorreoDeshabilitado()), salida, solo);

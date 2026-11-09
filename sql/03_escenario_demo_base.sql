@@ -5,10 +5,10 @@
 --
 -- Adaptado de los datos de demo de las capturas P01/P02. Todo es ficticio:
 -- nombres inventados, CUIL con dígito verificador INVÁLIDO, mails inventados.
--- No contiene contraseñas: la jefa demo usa el mismo hash que la cuenta de
--- desarrollo de la OP (se copia en la base, no se versiona).
+-- No contiene contraseñas: la jefa demo usa el mismo hash que la OP
+-- (se copia en la base al cargar el escenario).
 --
--- No usar directamente: lo incluye seed_capturas.sql (dentro de su transacción).
+-- No usar directamente: lo incluye 03_escenario_demo.sql (dentro de su transacción).
 -- ============================================================================
 -- Servicio (encargado se completa después de crear a la jefa) -----------------
 INSERT INTO Servicio (id, nombre, agrupacion, direccionID, encargadoUsuarioID, dotacionMinima)
@@ -16,7 +16,7 @@ VALUES ('de300000-0000-4000-a000-000000000001', 'Guardia Central', 'MEDICO',
         (SELECT u.id FROM Usuario u WHERE u.cuil = 20111111122), NULL, 2);
 
 -- Agentes ----------------------------------------------------------------------
--- passwordHash de la jefa = mismo hash que Medina (contraseña conocida de dev: Aromito1);
+-- passwordHash de la jefa = mismo hash que Medina (contraseña de prueba HMU.2026);
 -- el resto no necesita iniciar sesión.
 INSERT INTO Usuario (id, fechaAlta, estado, cuil, apellidos, nombres, sexo, mail, tel,
                      domicilioID, cargoID, servicioID, passwordHash)

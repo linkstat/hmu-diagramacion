@@ -1,5 +1,5 @@
 /**
- * Aromito - Sistema de Gestión de Novedades para el Hospital de Urgencias de Córdoba
+ * HMU Diagramación - Diagramación de servicios y gestión trazable del ausentismo en el Hospital de Urgencias de Córdoba
  * <p>
  * Esta aplicación tiene como propósito principal facilitar la gestión de novedades de RRHH (como faltas justificadas,
  * injustificadas o por fuerza mayor, omisiones de marcación, cambios de horario y/o de guardia, etc), dentro del ámbito

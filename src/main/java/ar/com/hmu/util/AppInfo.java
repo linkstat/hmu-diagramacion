@@ -2,9 +2,9 @@ package ar.com.hmu.util;
 
 public class AppInfo {
 
-    public static final String CFG_FOLDER_NAME = "Aromito";
-    public static final String PRG_LONG_TITLE = "Sistema de Gestión Hospitalario HMU" ;
-    public static final String PRG_SHORT_TITLE = "Aromito" ;
+    public static final String CFG_FOLDER_NAME = "HMU-Diagramacion";
+    public static final String PRG_LONG_TITLE = "HMU Diagramación" ;
+    public static final String PRG_SHORT_TITLE = "HMU Diagramación" ;
     public static final String NOMBRE_TFG = "HMU Diagramación";
     public static final String VERSION = "1.0.0";
     public static final String BUILD = "110123";
@@ -12,12 +12,12 @@ public class AppInfo {
     public static final String LOGO_IMAGE = "/images/mosaic_default_image.png";
     public static final String ICON_IMAGE = "/images/app-icon.png";
     /**
-     * Perfil de menú del TFG (por defecto): oculta los módulos fuera del alcance
-     * del E4 y los heredados que ahora son tipos de novedad.
-     * {@code -Daromito.menu=completo} los vuelve a mostrar.
+     * Perfil de menú del TFG (por defecto): oculta los módulos fuera del
+     * alcance del prototipo y los heredados que ahora son tipos de novedad.
+     * {@code -Dhmu.menu=completo} los vuelve a mostrar.
      */
     public static boolean perfilTfg() {
-        return !"completo".equalsIgnoreCase(System.getProperty("aromito.menu", "tfg"));
+        return !"completo".equalsIgnoreCase(System.getProperty("hmu.menu", "tfg"));
     }
 
     /** Nombre que muestra "Acerca de" según el perfil de menú. */
@@ -33,6 +33,7 @@ public class AppInfo {
             + "</head>"
             + "<body style=\"background-color:#F0F0F0;\">"
             + "<p><strong>Autor:</strong> Pablo Alejandro Hamann</p>"
+            + "<p style=\"font-size:smaller;color:#999999;\">Nombre en clave: Aromito</p>"
             + "</body>"
             + "</html>";
 

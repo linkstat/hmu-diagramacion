@@ -10,12 +10,9 @@ import java.util.Set;
  * Colaboradores de calendario que los generadores necesitan para expandir
  * un patrón de horario a fechas concretas.
  *
- * <p><b>Feriados (deuda explícita):</b> Aromito todavía no modela feriados
- * (no hay tabla {@code Feriado} ni carga anual). El contexto recibe el set
- * por constructor: los tests y la futura tabla lo poblarán; producción usa
- * {@link #sinFeriados()} hasta que exista la carga. Esto afecta la exactitud
- * de las modalidades que dependen de días hábiles/no laborables, pero no
- * bloquea el flujo (el jefe corrige a mano en la grilla).</p>
+ * <p><b>Feriados:</b> el contexto recibe el set de fechas por constructor
+ * (en producción viene de la tabla {@code Feriado}; los tests lo arman a
+ * mano, y {@link #sinFeriados()} sirve para los casos que no los usan).</p>
  */
 public class ContextoDiagramacion {
 

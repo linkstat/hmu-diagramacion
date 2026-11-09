@@ -1,29 +1,24 @@
-# Archivo de configuración de Aromito
-# las líneas que comienzan con # son comentarios,
-# y no son leídas por el programa (solo humanos ;-)
+# Archivo de configuración de HMU Diagramación.
+# Las líneas que comienzan con # son comentarios.
 #
-# Configuración del entorno de demostración (credenciales de prueba).
-# Para correr contra un PostgreSQL local, copiar config.local.yaml sobre
-# este archivo (ver README).
+# Configuración local lista para evaluar: PostgreSQL en esta misma PC con la
+# base, el usuario y la contraseña que crea la guía de instalación del README.
 #
 db:
   dbType: postgresql
   dbHost: localhost
   dbPort: 5432
-  dbName: aromito
-  dbUser: aromito
-  dbPass: aromitoSuperSecretDBPass
+  dbName: hmu_diagramacion
+  dbUser: hmu_diagramacion
+  dbPass: hmu_diagramacion
 
-# Configuración SMTP para notificaciones por email (memorándums, novedades,
-# diagramas). Si "host" queda en blanco, o si "auth" es true y "password"
-# está vacío, el EmailNotificationService no envía correo.
+# Notificaciones por correo (SMTP). Con "host" en blanco, o con "auth: true" y
+# "password" en blanco, no se envía correo: los avisos se ven en la aplicación.
 smtp:
-  host: "smtp-relay.brevo.com"
+  host: ""
   port: 587
-  from: "Aromito <noreply@hmu.com.ar>"
+  from: "HMU Diagramación <rrhh-no-responder@hmu.com.ar>"
   auth: true
   tls: true
-  username: "686776001@smtp-brevo.com"
-  # Clave SMTP de Brevo: completar en el momento; sin clave, los avisos se ven
-  # en pantalla y no se envía correo.
+  username: ""
   password: ""

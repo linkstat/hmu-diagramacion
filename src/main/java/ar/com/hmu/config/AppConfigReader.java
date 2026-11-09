@@ -12,7 +12,7 @@ import java.nio.file.Path;
  * <p>
  * La clase `AppConfigReader` utiliza la biblioteca SnakeYAML para deserializar un archivo de configuración
  * YAML (`config.yaml`) y cargar los valores necesarios para la configuración de la aplicación.
- * Por defecto lee {@code config/config.yaml} del classpath; con {@code -Daromito.config=<ruta>}
+ * Por defecto lee {@code config/config.yaml} del classpath; con {@code -Dhmu.config=<ruta>}
  * lee ese archivo.
  * Proporciona un objeto de tipo {@link AppConfig} que contiene tanto los detalles de conexión a la BD
  * como cualquier otra configuración general de la aplicación (que se agregue en el futuro).
@@ -49,9 +49,9 @@ public class AppConfigReader {
         Yaml yaml = new Yaml(constructor);
         String filePath = "config/config.yaml";
 
-        // -Daromito.config=<ruta> lee un archivo externo en lugar del config.yaml
+        // -Dhmu.config=<ruta> lee un archivo externo en lugar del config.yaml
         // empaquetado (útil al ejecutar el jar sin recompilar).
-        String externo = System.getProperty("aromito.config");
+        String externo = System.getProperty("hmu.config");
         if (externo != null && !externo.isBlank()) {
             filePath = externo;
         }

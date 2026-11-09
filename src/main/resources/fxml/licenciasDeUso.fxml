@@ -12,10 +12,10 @@
    <children>
       <ImageView fx:id="logoImageView" fitWidth="112.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/about_aromito.png" />
+            <Image url="@../images/about_image.png" />
          </image>
       </ImageView>
-      <Text fx:id="titleText" fill="DARKGOLDENROD" layoutX="150.0" layoutY="70.0" rotate="-5.0" stroke="DARKSLATEGRAY" strokeWidth="0.25" text="Aromito" wrappingWidth="195.64453125">
+      <Text fx:id="titleText" fill="DARKGOLDENROD" layoutX="150.0" layoutY="70.0" rotate="-5.0" stroke="DARKSLATEGRAY" strokeWidth="0.25" text="HMU Diagramación" wrappingWidth="380.0">
          <font>
             <Font name="Barlow Condensed" size="72.0" />
          </font>

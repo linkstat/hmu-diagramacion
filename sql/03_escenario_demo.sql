@@ -1,5 +1,5 @@
 -- ============================================================================
--- Seed de capturas del TFG (E4). SOLO BD de desarrollo.
+-- Escenario de demostración. SOLO para la base de prueba.
 --
 -- Escenario: semana del 5 al 7 de octubre de 2026 en el HMU.
 --   * Guardia Central (11 agentes ficticios) con el diagrama de OCTUBRE
@@ -17,17 +17,16 @@
 --
 -- Todo es ficticio (nombres inventados, CUIL con dígito verificador
 -- inválido). Idempotente: revierte lo anterior y vuelve a cargar.
--- Requiere: aromito_alter_novedades_e4.sql aplicado.
 --
--- Uso:  psql -h <host> -U aromito -d aromito -f sql/seed_capturas.sql
--- Revertir: psql ... -f sql/seed_capturas_revertir.sql
+-- Uso:  psql -h <host> -U hmu_diagramacion -d hmu_diagramacion -f sql/03_escenario_demo.sql
+-- Revertir: psql ... -f sql/03_escenario_demo_revertir.sql
 -- ============================================================================
 \set ON_ERROR_STOP on
-\ir seed_capturas_revertir.sql
+\ir 03_escenario_demo_revertir.sql
 
 BEGIN;
 
-\ir seed_capturas_base.sql
+\ir 03_escenario_demo_base.sql
 
 -- ---------------------------------------------------------------------------
 -- Diagramas de Guardia Central: octubre APROBADO, noviembre BORRADOR (P01)
@@ -162,8 +161,8 @@ UPDATE Agente SET vinculacion = 'MONOTRIBUTISTA' WHERE id = pg_temp.agente(11);
 UPDATE Agente SET vinculacion = 'CONTRATADO'     WHERE id = pg_temp.agente(3);
 -- Saldo del banco de horas: créditos (más abajo, en "Banco de horas").
 
--- Moreno, Daniela: agente demo para la vista del agente en el video (misma
--- contraseña de desarrollo que la OP; el hash se copia, no se versiona).
+-- Moreno, Daniela: agente demo para la vista del agente en el video
+-- (misma contraseña de prueba que la OP; el hash se copia de Medina).
 UPDATE Usuario SET passwordHash = (SELECT passwordHash FROM Usuario WHERE cuil = 27111122277)
 WHERE id = pg_temp.agente(5);
 -- Ficha completa para la captura del ABM (P07): domicilio en Córdoba y teléfono ficticio.

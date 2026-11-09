@@ -44,7 +44,7 @@ public class EmailNotificationService implements NotificationService {
                     + "(los avisos se ven en la aplicación).");
         }
         this.executor = Executors.newFixedThreadPool(2, r -> {
-            Thread t = new Thread(r, "aromito-email");
+            Thread t = new Thread(r, "hmu-email");
             t.setDaemon(true);
             return t;
         });
@@ -180,7 +180,7 @@ public class EmailNotificationService implements NotificationService {
         String from = config.getFrom();
         if (from == null || from.isBlank()) {
             try {
-                return new InternetAddress("noreply@aromito.local", "Aromito");
+                return new InternetAddress("rrhh-no-responder@hmu.com.ar", "HMU Diagramación");
             } catch (java.io.UnsupportedEncodingException e) {
                 throw new MessagingException("No se pudo construir la dirección 'from' por defecto", e);
             }
@@ -210,7 +210,7 @@ public class EmailNotificationService implements NotificationService {
 
     private String cuerpoPara(TipoEventoMemorandum evento, Memorandum memo, String comentarios) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Aromito :: Sistema de Gestión de Ausentismo Hospitalario\n");
+        sb.append("HMU Diagramación :: Diagramación de servicios y gestión trazable del ausentismo\n");
         sb.append("Hospital Municipal de Urgencias - Córdoba\n");
         sb.append("=========================================================\n\n");
 
@@ -245,7 +245,7 @@ public class EmailNotificationService implements NotificationService {
 
         sb.append("Asunto: ").append(memo.getAsunto() != null ? memo.getAsunto() : "(sin asunto)").append("\n");
         sb.append("\n");
-        sb.append("Para gestionar este memorándum, ingresá a Aromito.\n");
+        sb.append("Para gestionar este memorándum, ingresá a HMU Diagramación.\n");
         sb.append("\n");
         sb.append("---\n");
         sb.append("Este es un mensaje automático. Por favor no respondas a esta dirección.\n");
@@ -284,7 +284,7 @@ public class EmailNotificationService implements NotificationService {
     private String cuerpoPara(TipoEventoDiagrama evento, DiagramaDeServicio diagrama,
                               String nombreServicio, String comentarios) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Aromito :: Sistema de Gestión de Ausentismo Hospitalario\n");
+        sb.append("HMU Diagramación :: Diagramación de servicios y gestión trazable del ausentismo\n");
         sb.append("Hospital Municipal de Urgencias - Córdoba\n");
         sb.append("=========================================================\n\n");
 
@@ -310,7 +310,7 @@ public class EmailNotificationService implements NotificationService {
                 ? nombreServicio : "(sin nombre)").append("\n");
         sb.append("Período: ").append(periodoDe(diagrama)).append("\n");
         sb.append("\n");
-        sb.append("Para gestionar este diagrama, ingresá a Aromito.\n");
+        sb.append("Para gestionar este diagrama, ingresá a HMU Diagramación.\n");
         sb.append("\n");
         sb.append("---\n");
         sb.append("Este es un mensaje automático. Por favor no respondas a esta dirección.\n");

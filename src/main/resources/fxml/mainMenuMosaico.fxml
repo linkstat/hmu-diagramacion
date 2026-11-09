@@ -155,7 +155,7 @@
                   <Menu mnemonicParsing="false" text="Ayuda">
                      <items>
                         <MenuItem fx:id="licenciasDeUsoMenuItem" mnemonicParsing="false" text="Licencias de uso" />
-                        <MenuItem fx:id="acercaDeMenuItem" mnemonicParsing="false" text="Acerca de Aromito" />
+                        <MenuItem fx:id="acercaDeMenuItem" mnemonicParsing="false" text="Acerca de HMU Diagramación" />
                      </items>
                   </Menu>
               </menus>

@@ -39,8 +39,9 @@ public class LicenciasDeUsoController {
     public void initialize() {
         // Establecer los valores de las etiquetas utilizando las constantes
 
-        titleText.setText("Aromito");
-        titleText.setFont(javafx.scene.text.Font.font("Barlow Condensed", 72));
+        titleText.setText("HMU Diagramación");
+        titleText.setWrappingWidth(380);
+        titleText.setFont(javafx.scene.text.Font.font("Barlow Condensed", 46));
 
         descriptionText.setText("Este software hace uso de los siguientes elementos externos");
         descriptionText.setFont(Font.font("Barlow Condensed", 18));

@@ -999,7 +999,7 @@ public class MainMenuMosaicoController {
 
         // Configura la funcionalidad del menú: Ayuda -> Acerca de
         acercaDeMenuItem.setText("Acerca de " + AppInfo.nombreAcercaDe());
-        acercaDeMenuItem.setOnAction(event -> handleAcercaDeAromito());
+        acercaDeMenuItem.setOnAction(event -> handleAcercaDe());
 
         // Configura los mosaicos para mostrar una alerta de "Módulo en construcción"
         aprobacionSolicitudesVBox.setOnMouseClicked(event -> abrirNovedades(null));
@@ -1565,7 +1565,7 @@ public class MainMenuMosaicoController {
      * Muestra la ventana de "Acerca de...".
      */
     @FXML
-    private void handleAcercaDeAromito() {
+    private void handleAcercaDe() {
         try {
             // Cargar el FXML de la ventana "Acerca de"
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));

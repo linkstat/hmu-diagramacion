@@ -7,20 +7,19 @@ db:
   dbType: postgresql
   dbHost: localhost
   dbPort: 5432
-  dbName: aromito
-  dbUser: aromito
+  dbName: hmu_diagramacion
+  dbUser: hmu_diagramacion
   dbPass: ""
 
-# Configuración SMTP para notificaciones por email (memorándums, diagramas).
-# Si "host" queda en blanco, el EmailNotificationService es no-op silencioso
-# (útil en desarrollo o en tests sin acceso al relay).
-# Ejemplo para el relay de Brevo (puerto 587 con STARTTLS):
-#   host: "smtp-relay.brevo.com", port: 587, auth: true, tls: true
-# El remitente debe pertenecer a un dominio autenticado en el relay.
+# Notificaciones por correo (SMTP). Con "host" en blanco, o con "auth: true" y
+# "password" en blanco, no se envía correo: los avisos se ven en la aplicación.
+# Ejemplo para un relay con STARTTLS: host "smtp.ejemplo.com", port 587,
+# auth: true, tls: true. El remitente debe pertenecer a un dominio autenticado
+# en el relay.
 smtp:
   host: ""
   port: 587
-  from: "Aromito <noreply@hmu.com.ar>"
+  from: "HMU Diagramación <rrhh-no-responder@hmu.com.ar>"
   auth: true
   tls: true
   username: ""

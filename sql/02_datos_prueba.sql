@@ -1,5 +1,5 @@
 /* ============================================================================
- * Aromito - Operaciones CRUD de inicialización y prueba (PostgreSQL)
+ * HMU Diagramación - Datos de prueba (PostgreSQL)
  *
  * Este script:
  *  1. Limpia los registros de todas las tablas (preservando schema y la
@@ -28,10 +28,9 @@
  *    UUID_TO_BIN/BIN_TO_UUID se eliminan (UUID es tipo nativo).
  *
  * Usuarios para pruebas de login:
- *  - Default password 'Aromito1' para todos, EXCEPTO:
- *  - Pérez, Juan Carlos       (CUIL 20-11111111-1) — Director, multirol
- *  - Medina, Rosa             (CUIL 27-11112222-7) — password = CUIL (test default-password detection)
- *  - Valdez, Mateo            (CUIL 24-11114449-9) — password = CUIL (test default-password detection)
+ *  - Contraseña 'HMU.2026' (Argon2id) para todos, EXCEPTO:
+ *  - Valdez, Mateo (CUIL 24-11114449-9) — password = CUIL, para demostrar el
+ *    cambio obligatorio de la contraseña inicial en el primer ingreso.
  * ========================================================================== */
 
 
@@ -99,57 +98,57 @@ INSERT INTO Cargo (id, numero, descripcion, agrupacion) VALUES
 -- Se insertan SIN servicioID para romper el ciclo Usuario↔Servicio↔Agente.
 -- El servicioID se asigna después de que existan los Servicios (paso 7).
 --
--- Los hashes son BCrypt (rounds=12). El primer login los re-hashea a Argon2id.
--- Default password 'Aromito1' (hash $2a$12$dUczG...) salvo Medina y Valdez,
--- que tienen password = CUIL para probar la detección de password por defecto.
+-- Hashes Argon2id (m=19456, t=2, p=1) generados con PasswordUtils.
+-- Contraseña 'HMU.2026' para todos, salvo Valdez (password = CUIL, para
+-- demostrar el cambio obligatorio de contraseña en el primer ingreso).
 -- ----------------------------------------------------------------------------
 INSERT INTO Usuario (id, nombres, apellidos, mail, cuil, fechaAlta, sexo, estado, domicilioID, passwordHash) VALUES
     -- Dirección (4 personas)
-    (gen_random_uuid(), 'Juan Carlos', 'Pérez',     'perez@hmu.com.ar',     20111111111, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio WHERE calle = 'Calle Principal' AND numeracion = 441 LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Pedro',       'García',    'garcia@hmu.com.ar',    20111111122, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio WHERE calle = 'Av. Siempreviva' AND numeracion = 742 LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'María',       'Rodríguez', 'rodriguez@hmu.com.ar', 27111111133, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio WHERE ciudad = 'Alta Gracia' LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Carlos',      'González',  'gonzalez@hmu.com.ar',  20111111144, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio WHERE calle = 'Calle Principal' AND numeracion = 441 LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
+    (gen_random_uuid(), 'Juan Carlos', 'Pérez',     'perez@hmu.com.ar',     20111111111, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio WHERE calle = 'Calle Principal' AND numeracion = 441 LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Pedro',       'García',    'garcia@hmu.com.ar',    20111111122, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio WHERE calle = 'Av. Siempreviva' AND numeracion = 742 LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'María',       'Rodríguez', 'rodriguez@hmu.com.ar', 27111111133, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio WHERE ciudad = 'Alta Gracia' LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Carlos',      'González',  'gonzalez@hmu.com.ar',  20111111144, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio WHERE calle = 'Calle Principal' AND numeracion = 441 LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
 
     -- Jefaturas de Servicio (12 personas + Medina/OdP que también es jefa)
-    (gen_random_uuid(), 'Ana',         'Fernández', 'fernandez@hmu.com.ar', 27111111155, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Laura',       'López',     'lopez@hmu.com.ar',     27111111166, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Miguel',      'Martínez',  'martinez@hmu.com.ar',  20111111177, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Diego',       'Gómez',     'gomez@hmu.com.ar',     20111111188, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Lucía',       'Díaz',      'diaz@hmu.com.ar',      27111111199, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Pablo',       'Álvarez',   'alvarez@hmu.com.ar',   20111122200, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Sofía',       'Torres',    'torres@hmu.com.ar',    27111122211, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Andrés',      'Ruiz',      'ruiz@hmu.com.ar',      20111122222, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Sam',         'Ramírez',   'ramirez@hmu.com.ar',   20111122233, CURRENT_DATE, 'OTRO',      TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Carmen',      'Flores',    'flores@hmu.com.ar',    27111122244, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Roberto',     'Acosta',    'acosta@hmu.com.ar',    20111122255, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Patricia',    'Benítez',   'benitez@hmu.com.ar',   27111122266, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
+    (gen_random_uuid(), 'Ana',         'Fernández', 'fernandez@hmu.com.ar', 27111111155, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Laura',       'López',     'lopez@hmu.com.ar',     27111111166, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Miguel',      'Martínez',  'martinez@hmu.com.ar',  20111111177, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Diego',       'Gómez',     'gomez@hmu.com.ar',     20111111188, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Lucía',       'Díaz',      'diaz@hmu.com.ar',      27111111199, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Pablo',       'Álvarez',   'alvarez@hmu.com.ar',   20111122200, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Sofía',       'Torres',    'torres@hmu.com.ar',    27111122211, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Andrés',      'Ruiz',      'ruiz@hmu.com.ar',      20111122222, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Sam',         'Ramírez',   'ramirez@hmu.com.ar',   20111122233, CURRENT_DATE, 'OTRO',      TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Carmen',      'Flores',    'flores@hmu.com.ar',    27111122244, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Roberto',     'Acosta',    'acosta@hmu.com.ar',    20111122255, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Patricia',    'Benítez',   'benitez@hmu.com.ar',   27111122266, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
 
     -- Oficina de Personal (Medina — también es jefa de servicio; password = CUIL para test)
-    (gen_random_uuid(), 'Rosa',        'Medina',    'medina@hmu.com.ar',    27111122277, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2y$12$37LI3.hbNU74v2eYm8VkgevLX47FH0jBM2OIxM0C6HtS9lxmpgoVK'),
+    (gen_random_uuid(), 'Rosa',        'Medina',    'medina@hmu.com.ar',    27111122277, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
 
     -- Empleados (no jefaturas, no dirección)
-    (gen_random_uuid(), 'Eduardo',     'Castro',    'castro@hmu.com.ar',    20111122288, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Fernando',    'Ortiz',     'ortiz@hmu.com.ar',     20111122299, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Ricardo',     'Silva',     'silva@hmu.com.ar',     20111133300, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Beatriz',     'Núñez',     'nunez@hmu.com.ar',     27111133311, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Cristina',    'Molina',    'molina@hmu.com.ar',    27111133322, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Mónica',      'Rojas',     'rojas@hmu.com.ar',     27111133333, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Sergio',      'Vega',      'vega@hmu.com.ar',      20111133344, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Alex',        'Cabrera',   'cabrera@hmu.com.ar',   24111133355, CURRENT_DATE, 'OTRO',      TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Silvia',      'Herrera',   'herrera@hmu.com.ar',   27111133366, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Liliana',     'Aguirre',   'aguirre@hmu.com.ar',   27111133377, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Alberto',     'Luna',      'luna@hmu.com.ar',      20111133388, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Adriana',     'Ríos',      'rios@hmu.com.ar',      27111133399, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Verónica',    'Reyes',     'reyes@hmu.com.ar',     27111144400, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Sasha',       'Cruz',      'cruz@hmu.com.ar',      24111144411, CURRENT_DATE, 'OTRO',      TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Marcelo',     'Pereyra',   'pereyra@hmu.com.ar',   20111144422, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Gustavo',     'Quiroga',   'quiroga@hmu.com.ar',   20111144433, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Susana',      'Vázquez',   'vazquez@hmu.com.ar',   27111144444, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Hernán',      'Gutiérrez', 'gutierrez@hmu.com.ar', 20111144455, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Daniel',      'Ojeda',     'ojeda@hmu.com.ar',     20111144466, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Luis',        'Bravo',     'bravo@hmu.com.ar',     20111144477, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Tomás',       'Soria',     'soria@hmu.com.ar',     20111144488, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$2a$12$dUczG8OtzxElYH.qAXbtUOHVKORj4zJH2eoy5WXfXqXUm0vRq3obO'),
-    (gen_random_uuid(), 'Mateo',       'Valdez',    'valdez@hmu.com.ar',    24111144499, CURRENT_DATE, 'OTRO',      TRUE, (SELECT id FROM Domicilio WHERE calle = 'Av. Independencia' LIMIT 1), '$2y$12$YhlvKLqVs19Wk6AFuU0HG.UP94gF6A9yvWYHhBdyENxazMJk/H1vC');
+    (gen_random_uuid(), 'Eduardo',     'Castro',    'castro@hmu.com.ar',    20111122288, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Fernando',    'Ortiz',     'ortiz@hmu.com.ar',     20111122299, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Ricardo',     'Silva',     'silva@hmu.com.ar',     20111133300, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Beatriz',     'Núñez',     'nunez@hmu.com.ar',     27111133311, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Cristina',    'Molina',    'molina@hmu.com.ar',    27111133322, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Mónica',      'Rojas',     'rojas@hmu.com.ar',     27111133333, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Sergio',      'Vega',      'vega@hmu.com.ar',      20111133344, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Alex',        'Cabrera',   'cabrera@hmu.com.ar',   24111133355, CURRENT_DATE, 'OTRO',      TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Silvia',      'Herrera',   'herrera@hmu.com.ar',   27111133366, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Liliana',     'Aguirre',   'aguirre@hmu.com.ar',   27111133377, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Alberto',     'Luna',      'luna@hmu.com.ar',      20111133388, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Adriana',     'Ríos',      'rios@hmu.com.ar',      27111133399, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Verónica',    'Reyes',     'reyes@hmu.com.ar',     27111144400, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Sasha',       'Cruz',      'cruz@hmu.com.ar',      24111144411, CURRENT_DATE, 'OTRO',      TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Marcelo',     'Pereyra',   'pereyra@hmu.com.ar',   20111144422, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Gustavo',     'Quiroga',   'quiroga@hmu.com.ar',   20111144433, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Susana',      'Vázquez',   'vazquez@hmu.com.ar',   27111144444, CURRENT_DATE, 'FEMENINO',  TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Hernán',      'Gutiérrez', 'gutierrez@hmu.com.ar', 20111144455, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Daniel',      'Ojeda',     'ojeda@hmu.com.ar',     20111144466, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Luis',        'Bravo',     'bravo@hmu.com.ar',     20111144477, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Tomás',       'Soria',     'soria@hmu.com.ar',     20111144488, CURRENT_DATE, 'MASCULINO', TRUE, (SELECT id FROM Domicilio ORDER BY random() LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$LoUDo+lYBJ0n85dEZDAW7Q$jy8A9NX32UQaJ6cTfGxqKr4e/cmmzm15bzqTxSBdODs'),
+    (gen_random_uuid(), 'Mateo',       'Valdez',    'valdez@hmu.com.ar',    24111144499, CURRENT_DATE, 'OTRO',      TRUE, (SELECT id FROM Domicilio WHERE calle = 'Av. Independencia' LIMIT 1), '$argon2id$v=19$m=19456,t=2,p=1$jFydvJuocmb3A5UQkc7QCg$ZXThbXDI7MQSp9KjBiqOhiE0TNaDhk2RhTtNGCD0J/g');
 
 
 -- ----------------------------------------------------------------------------
@@ -283,15 +282,18 @@ INSERT INTO Rol (id, nombre, descripcion) VALUES
 -- 10) Asignación de roles
 --
 -- Todos reciben 'Empleado'. Las jefaturas/dirección/oficina reciben sus
--- roles específicos adicionales.
+-- roles específicos adicionales. La vigencia arranca el 2026-01-01 (fecha
+-- fija en el pasado): el escenario de demostración corre con hmu.hoy =
+-- 2026-10-07 y la instalación puede ser posterior; con el DEFAULT
+-- CURRENT_DATE los roles quedarían a futuro y el menú, vacío.
 -- ----------------------------------------------------------------------------
 -- Empleado para todos
-INSERT INTO AsignacionRol (usuarioID, rolID)
-SELECT u.id, r.id FROM Usuario u, Rol r WHERE r.nombre = 'Empleado';
+INSERT INTO AsignacionRol (usuarioID, rolID, fechaDesde)
+SELECT u.id, r.id, DATE '2026-01-01' FROM Usuario u, Rol r WHERE r.nombre = 'Empleado';
 
 -- JefaturaDeServicio para los jefes (incluye a Medina, que también es OdP)
-INSERT INTO AsignacionRol (usuarioID, rolID)
-SELECT u.id, r.id FROM Usuario u, Rol r
+INSERT INTO AsignacionRol (usuarioID, rolID, fechaDesde)
+SELECT u.id, r.id, DATE '2026-01-01' FROM Usuario u, Rol r
 WHERE r.nombre = 'JefaturaDeServicio'
   AND u.apellidos IN (
       'Fernández', 'López', 'Martínez', 'Gómez', 'Díaz', 'Álvarez',
@@ -299,19 +301,19 @@ WHERE r.nombre = 'JefaturaDeServicio'
   );
 
 -- OficinaDePersonal para Medina
-INSERT INTO AsignacionRol (usuarioID, rolID)
-SELECT u.id, r.id FROM Usuario u, Rol r
+INSERT INTO AsignacionRol (usuarioID, rolID, fechaDesde)
+SELECT u.id, r.id, DATE '2026-01-01' FROM Usuario u, Rol r
 WHERE r.nombre = 'OficinaDePersonal' AND u.apellidos = 'Medina';
 
 -- Direccion para los 4 directivos
-INSERT INTO AsignacionRol (usuarioID, rolID)
-SELECT u.id, r.id FROM Usuario u, Rol r
+INSERT INTO AsignacionRol (usuarioID, rolID, fechaDesde)
+SELECT u.id, r.id, DATE '2026-01-01' FROM Usuario u, Rol r
 WHERE r.nombre = 'Direccion'
   AND u.apellidos IN ('Pérez', 'García', 'Rodríguez', 'González');
 
 -- Pérez también ejerce JefaturaDeServicio
-INSERT INTO AsignacionRol (usuarioID, rolID)
-SELECT u.id, r.id FROM Usuario u, Rol r
+INSERT INTO AsignacionRol (usuarioID, rolID, fechaDesde)
+SELECT u.id, r.id, DATE '2026-01-01' FROM Usuario u, Rol r
 WHERE r.nombre = 'JefaturaDeServicio'
   AND u.apellidos = 'Pérez' AND u.nombres = 'Juan Carlos';
 
