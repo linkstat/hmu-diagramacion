@@ -1,9 +1,10 @@
-"""Genera el DER de la base aromito (Graphviz) desde el catálogo de PostgreSQL.
+"""Genera el DER de la base hmu_diagramacion (Graphviz) desde el catálogo de PostgreSQL.
 
 uso: python3 der.py <salida.dot> [--con-memos]
-Excluye las tablas heredadas sin uso en el E4. Los nombres se muestran con el
-casing del DDL completo (sql/aromito_creacion_de_tablas.sql).
+Excluye las tablas heredadas sin uso. Los nombres se muestran con el
+casing del DDL completo (sql/01_esquema.sql).
 """
+import pathlib
 import re
 import subprocess
 import sys
@@ -73,7 +74,7 @@ def sql(q):
 
 
 # Casing del DDL completo: minúsculas -> forma declarada.
-ddl = open('/home/pub/seminare/sql/aromito_creacion_de_tablas.sql', encoding='utf-8').read()
+ddl = open(pathlib.Path(__file__).resolve().parents[3] / 'sql' / '01_esquema.sql', encoding='utf-8').read()
 ddl = re.sub(r'--[^\n]*|/\*.*?\*/', ' ', ddl, flags=re.S)
 CASO = {}
 ORDEN = {}   # (tabla, columna) -> posición en el CREATE TABLE del DDL (orden lógico, PK primero)

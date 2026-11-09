@@ -1,7 +1,7 @@
-﻿# build-ea-model.ps1  (generado automáticamente; revisión E4 08/11/2026: CodigoNovedad, banco de horas FIFO, pases y justificación de HE)
+﻿# build-ea-model.ps1
 # Construye el modelo UML del TFG en Enterprise Architect mediante su interfaz de automatización.
 param(
-  [string]$UmlDir = "C:\Users\linkstat\Nextcloud\UES21\Seminario Final\Entregables\UML",
+  [string]$UmlDir = $PSScriptRoot,
   [string]$ModelName = "TFG-HMU-Modelo"
 )
 $ErrorActionPreference = "Stop"
